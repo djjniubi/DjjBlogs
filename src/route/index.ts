@@ -1,4 +1,5 @@
 import { createRouter,createWebHashHistory,RouteRecordRaw } from "vue-router";
+import dynamic from "./modules/dynamicRoute";
 const routes:Array<RouteRecordRaw>=[{
     path:"/",
     component:()=>import("../layouts/index.vue")
@@ -7,8 +8,8 @@ const routes:Array<RouteRecordRaw>=[{
     component:()=>import("../view/home/index.vue")
 }]
 //读取view 所有文件
-// const modules=import.meta.glob("../view/**/*.vue")
-// console.log("modules",modules);
+const modules=import.meta.glob("../view/**/*.vue")
+console.log("modules",modules);
 
 const router = createRouter({
     history:createWebHashHistory(),    //路由模式
