@@ -21,13 +21,11 @@
                 <div></div>
                <!-- <Home/> -->
                 <router-view v-slot="{ Component, route }">
-                    <div>{{ route }}</div>
-                    <div>{{ Component  }}</div>
-                    <!-- <transition appear name="fade-transform" mode="out-in">
+                    <transition appear name="fade-transform" mode="out-in">
                         <keep-alive :include="'Homn'">
                             <component :is="Component" :key="route.path"></component>
                         </keep-alive>
-                    </transition> -->
+                    </transition>
                 </router-view>
             </el-main>
         </el-container>
@@ -39,7 +37,7 @@ import NavMenu from './components/Menu/NavMenu.vue';
 import ToolBarLeft from "./components/Header/ToolBarLeft.vue"
 import ToolBarRight from "./components/Header/ToolBarRight.vue"
 import {useRouter,useRoute } from "vue-router"
-import dynamic from "../route/modules/dynamicRoute"
+import {dynamic} from "../route/modules/dynamicRoute"
 import Home from "../view/home/index.vue"
 const router = useRouter();
 console.log("router",router);
