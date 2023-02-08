@@ -47,7 +47,7 @@ export const staticRouter:Array<RouteRecordRaw>=[
     }
 ]
 
-//动态路由
+//动态路由  路由接口参数
 export const dynamic=[{
     name:"首页",
     path:"/home/index",

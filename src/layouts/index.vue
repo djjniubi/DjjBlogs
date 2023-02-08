@@ -1,5 +1,6 @@
 <template>
     <el-container>
+        <!-- 左侧导航栏 -->
         <el-aside width="200px">
             <div class="nav-menu">
                 <el-scrollbar >
@@ -10,23 +11,17 @@
             </div>
         </el-aside>
         <el-container>
+            <!-- 头部 -->
             <el-header>
                 <div class="">
                     <ToolBarLeft/>
-                    <!-- <div>首页</div> -->
                 </div>
                 <ToolBarRight/>
             </el-header>
+            <!-- 内容主体 -->
             <el-main>
                 <div></div>
-               <!-- <Home/> -->
-                <router-view v-slot="{ Component, route }">
-                    <transition appear name="fade-transform" mode="out-in">
-                        <keep-alive :include="'Homn'">
-                            <component :is="Component" :key="route.path"></component>
-                        </keep-alive>
-                    </transition>
-                </router-view>
+               <Main/>
             </el-main>
         </el-container>
     </el-container>
@@ -38,13 +33,11 @@ import ToolBarLeft from "./components/Header/ToolBarLeft.vue"
 import ToolBarRight from "./components/Header/ToolBarRight.vue"
 import {useRouter,useRoute } from "vue-router"
 import {dynamic} from "../route/modules/dynamicRoute"
-import Home from "../view/home/index.vue"
+import Main from "./components/Main/Main.vue"
 const router = useRouter();
 console.log("router",router);
 const menuList:object[]=dynamic
     const route = useRoute()
-
-    console.log("route",route.query);
     const modules=import.meta.glob("../view/**/*.vue")
 console.log("modules",modules);
 </script>
