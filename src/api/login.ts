@@ -8,6 +8,8 @@ export const register=(data:any)=>{
     })
 }
 
+//登录
+
 //获取验证码 /code/captcha
 export const codeCaptcha=()=>{
     return http.request({

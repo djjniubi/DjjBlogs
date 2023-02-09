@@ -1,12 +1,19 @@
 import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
-
+import {setStorage,getStorage} from "@/utils/index"
 const http:AxiosInstance=axios.create({
     baseURL:"http://localhost:3000",
-    timeout:60000
+    timeout:60000,
+    headers:{
+        "content-type":"application/json; charset=utf-8",
+    }
 })
 //请求拦截
 http.interceptors.request.use((config)=>{
+    const token = getStorage("token")
+    if(token){
+        config.headers["Authorization"]="Bearer"+token
+    }
     return config
 },(error:AxiosError)=>{
     return Promise.reject(error)
