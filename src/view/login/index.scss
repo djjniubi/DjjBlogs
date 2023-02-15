@@ -14,7 +14,8 @@
     height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center; 
+  animation: bounceOut 5s; 
 }
 .login{
     width: 542px;
@@ -53,4 +54,22 @@
    .p2:hover{
     cursor:pointer;
    }  
+}
+
+@keyframes bounceOut  {
+    0% {
+        // -webkit-transform: translateY(100vh);
+        transform: translateY(100vh);
+     }
+     25% {
+        opacity: 0.2;
+     }
+     50% {
+        opacity: 0.5;
+     }
+     100% {
+        opacity: 1;
+        // -webkit-transform: translateY(0);
+        transform: translateY(0px);
+     }
 }

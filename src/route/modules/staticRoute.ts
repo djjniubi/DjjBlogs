@@ -28,7 +28,6 @@ const staticRoute: Array<RouteRecordRaw> = [
         name: "articleList",
         component: () => import("@/layouts/index.vue"),
         children: [{
-
             path: "/articleList/index",
             name: "list",
             component: () => import("@/view/articleList/index.vue")

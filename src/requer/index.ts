@@ -6,8 +6,14 @@ const http:AxiosInstance=axios.create({
     timeout:60000,
     headers:{
         "content-type":"application/json; charset=utf-8",
-    }
+        " Access-Control-Allow-Credentials":true,
+    },
+     
+    // withCredentials:true,
+   
+    
 })
+// http.defaults.withCredentials=true
 //请求拦截
 http.interceptors.request.use((config)=>{
     const token = getStorage("token")
@@ -21,6 +27,8 @@ http.interceptors.request.use((config)=>{
 
 //响应拦截
 http.interceptors.response.use((response: AxiosResponse)=>{
+    console.log("response",document.cookie);
+    
     const {data} =response
     return data
 },(error:AxiosError)=>{
