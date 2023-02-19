@@ -54,7 +54,10 @@ import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import { codeCaptcha,userLogin } from "@/api/login";
 import {setStorage} from "@/utils/index"
+import { GlobalStore}from "@/store"
 const formSize = ref("default");
+const globalStore=GlobalStore()
+
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
   username: "",
@@ -65,8 +68,12 @@ const lognType=ref(true)
 const svg=ref()
 const code = ref();
 const validatePass =(rule:any,value:any,callback:any):any=>{
+  console.log("code",code);
+  
     if(value!==code.value){
       callback("验证码不正确")
+    }else{
+      callback()
     }
 
 }
@@ -92,20 +99,20 @@ const rules = reactive<FormRules>({
     {validator:validatePass}
   ],
 });
-console.log("cookis",document.cookie.split("="));
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-
+  console.log("valid",formEl);
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
-    console.log("valid");
-    
+   
     if (valid) {
+      console.log("ruleForm",ruleForm);
       if(ruleForm["code"]!==code.value){
           
       }else{
         userLogin(ruleForm).then((res:any)=>{
-          setStorage("token",res["token"])
+          globalStore.setToken(res["token"])
+          globalStore.setUserInfo(res["userinfo"])
         })
       }
        

@@ -19,9 +19,9 @@ router.beforeEach(async(to,from,next)=>{
     
     const token =getStorage("token")
     if(token){
-        // if(to.path==="/login"){
-        //     next()
-        // }
+        if(to.path==="/login"){
+            next()
+        }
         next()
     }else{
         if(whiteList.indexOf(to.path) !== -1){

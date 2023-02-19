@@ -1,18 +1,13 @@
 import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
 import {setStorage,getStorage} from "@/utils/index"
-const http:AxiosInstance=axios.create({
-    baseURL:"http://localhost:3000",
-    timeout:60000,
-    headers:{
-        "content-type":"application/json; charset=utf-8",
-        " Access-Control-Allow-Credentials":true,
-    },
-     
-    // withCredentials:true,
-   
-    
-})
+import {ResultEnum} from "@/enums/httpEnums"
+const config ={
+    baseURL:import.meta.env.VITE_API_URL as string,
+    timeout:ResultEnum.TIMEOUT as number,
+    // withCredentials:true
+}
+const http:AxiosInstance=axios.create(config)
 // http.defaults.withCredentials=true
 //请求拦截
 http.interceptors.request.use((config)=>{
@@ -27,7 +22,7 @@ http.interceptors.request.use((config)=>{
 
 //响应拦截
 http.interceptors.response.use((response: AxiosResponse)=>{
-    console.log("response",document.cookie);
+    console.log("response",document.cookie.split("="));
     
     const {data} =response
     return data

@@ -59,6 +59,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive } from "vue";
+import {articleList} from "@/api/article"
 //检索表单
 const formLabelAlign = reactive({
   name: "",
@@ -83,6 +84,11 @@ const tableData: Article[] = [
     state: "0",
   },
 ];
+
+articleList({}).then(res=>{
+  console.log("articleList",res);
+  
+})
 </script>
 <style lang="scss" scoped>
 .home {

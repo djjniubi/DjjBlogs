@@ -26,7 +26,7 @@ export const codeAuth=(code:any)=>{
 //获取验证码 /code/captcha
 export const codeCaptcha=()=>{
     return http.request({
-        url:"/code/captcha",
+        url:"/api/captcha",
         method:"GET"
     })
 }
