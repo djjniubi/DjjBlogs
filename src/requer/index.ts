@@ -2,10 +2,11 @@ import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
 import {setStorage,getStorage} from "@/utils/index"
 import {ResultEnum} from "@/enums/httpEnums"
+
 const config ={
     baseURL:import.meta.env.VITE_API_URL as string,
     timeout:ResultEnum.TIMEOUT as number,
-    // withCredentials:true
+    
 }
 const http:AxiosInstance=axios.create(config)
 // http.defaults.withCredentials=true
@@ -13,7 +14,7 @@ const http:AxiosInstance=axios.create(config)
 http.interceptors.request.use((config)=>{
     const token = getStorage("token")
     if(token){
-        config.headers["Authorization"]="Bearer"+token
+        config.headers["Authorization"]="Bearer "+token
     }
     return config
 },(error:AxiosError)=>{
@@ -21,8 +22,8 @@ http.interceptors.request.use((config)=>{
 })  
 
 //响应拦截
-http.interceptors.response.use((response: AxiosResponse)=>{
-    console.log("response",document.cookie.split("="));
+http.interceptors.response.use((response:AxiosResponse)=>{
+    console.log("response",document.cookie.split(""));
     
     const {data} =response
     return data

@@ -75,10 +75,11 @@ props.editorConfig.MENU_CONF!["uploadImage"]={
          let fromData=new FormData()
          fromData.append("avatar",file)
         try {
-            upload(fromData).then(res=>{
-                insertFn(res.ingUrl);
-            }) 
-			
+            // upload(fromData).then(res=>{
+            //     insertFn(res.ingUrl);
+            // }) 
+			const {data} = await upload(fromData)
+            insertFn(`http://loclhost:3000${data.url}`);
 		} catch (error) {
 			console.log(error);
 		}               // TS 语法

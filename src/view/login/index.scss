@@ -1,75 +1,89 @@
-.login-body{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
+.login-body {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: url("../../assets/images/pexels-snapwire.jpg");
+}
+.form-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   animation: bounceOut 5s;
+}
+.login {
+    position: absolute;
     left: 0;
+    top: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
-    background-image: url("../../assets/images/pexels-snapwire.jpg");
+  width: 542px;
+  height: 392px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 1);
+  margin: auto;
+  text-align: center;
+  backface-visibility: hidden;
+  transition: all 0.8s ease;
+  &_form {
+    padding: 10px;
+  }
+  .code-item {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+  .submit-form {
+    width: 90%;
+    margin-top: 30px;
+  }
 }
-.form-box{
-    width: 100%;
-    height: 100%;
+.login.back{ 
+    transform:rotateY(-180deg);
+}
+.turn-out-front{
+    transform: rotateY(180deg) !important;
+}
+.turn-out-back{
+    transform: rotateY(0deg) !important;
+}
+.sign-up {
+  margin: 20px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center; 
-  animation: bounceOut 5s; 
-}
-.login{
-    width: 542px;
-    height: 392px;
-    padding: 20px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 1);
-    margin: auto;
-    text-align: center;
-    &_form{
-       padding: 10px; 
-    }
-    .code-item{
-        margin-bottom: 0;
-        margin-right: 15px;
-    }
-    .submit-form{
-        width: 90%;
-        margin-top: 30px;
-    }
-    
-
-}
-
-.sign-up{
-    margin: 20px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   .p1{
+  .p1 {
     color: #d7d8d7;
-   }
-   .p2{
+  }
+  .p2 {
     color: #79bbff;
-   }   
-   .p2:hover{
-    cursor:pointer;
-   }  
+  }
+  .p2:hover {
+    cursor: pointer;
+  }
 }
 
-@keyframes bounceOut  {
-    0% {
-        // -webkit-transform: translateY(100vh);
-        transform: translateY(100vh);
-     }
-     25% {
-        opacity: 0.2;
-     }
-     50% {
-        opacity: 0.5;
-     }
-     100% {
-        opacity: 1;
-        // -webkit-transform: translateY(0);
-        transform: translateY(0px);
-     }
+@keyframes bounceOut {
+  0% {
+    // -webkit-transform: translateY(100vh);
+    transform: translateY(100vh);
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    // -webkit-transform: translateY(0);
+    transform: translateY(0px);
+  }
 }
