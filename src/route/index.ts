@@ -1,10 +1,20 @@
 import { createRouter,createWebHashHistory,RouteRecordRaw } from "vue-router";
 import {dynamic,staticRouter} from "./modules/dynamicRoute";
 import staticRoute from "@/route/modules/staticRoute"
-//读取view 所有文件
-// const modules=import.meta.glob("../view/**/*.vue")
-// console.log("modules",modules);
 
+//读取view 所有文件
+const modules=import.meta.glob("../view/**/page.ts",{eager:true,import:"default"})
+const modulesArr=Object.entries(modules)
+const  aaaa=modulesArr.map(([pagePath,config])=>{
+    console.log("aaaa",pagePath.replace("../view","").replace("/page.ts",""));
+    return {
+        path: "/",
+        name: "",
+        component: () => import("@/view/login/index.vue"),
+        meta: config
+    }
+})
+console.log("modules",modulesArr);
 const router = createRouter({
     history:createWebHashHistory(),    //路由模式
     routes:staticRoute,                 //路由表

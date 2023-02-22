@@ -3,7 +3,7 @@
     <div class="search-bar">
       <el-form
         class="search-bar_form"
-        label-position="label-width"
+        label-position="left"
         label-width="100px"
         :model="formLabelAlign"
       >
@@ -46,10 +46,10 @@
             <el-tag
               v-if="scope.row.state !== '0' || 0"
               class="mx-1"
-              size="success"
+              type="success"
               >已发布</el-tag
             >
-            <el-tag v-else class="mx-1" size="danger">未发布</el-tag>
+            <el-tag v-else class="mx-1" type="danger" >未发布</el-tag>
           </el-row>
         </template>
       </el-table-column>
@@ -89,18 +89,21 @@
       </el-form>
     </div>
     <div style="border: 1px solid black;">
-      <WangEditor v-model:value="value"/>
+      <WangEditor v-model:value="content" />
     </div>
     <template #footer>
       <span class="dialog-footer"> </span>
     </template>
   </el-dialog>
+   <div @click="aaa()">点击</div>
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { articleList } from "@/api/article";
 import type { FormInstance, FormRules } from "element-plus";
 import WangEditor from "@/components/WangEditor/index.vue";
+const content = ref("")
+
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
@@ -109,18 +112,18 @@ const ruleForm = reactive({
 });
 const rules = reactive<FormRules>({
   title: [
-    { required: true, message: "Please input Activity name", trigger: "blur" },
-    { message: "Length should be 3 to 5", trigger: "blur" },
+    { required: true, message: "请输入标题", trigger: "blur" },
   ],
   region: [
     {
       required: true,
-      message: "Please select Activity zone",
+      message: "请选择文章类型",
       trigger: "change",
     },
   ],
 });
-const value =ref("")
+
+
 //检索表单
 const formLabelAlign = reactive({
   name: "",
@@ -147,11 +150,13 @@ let tableData:{data:Article[]} =reactive({data:[
 ]}) 
 //对话框
 const dialogVisible = ref(false);
-articleList({}).then((res: any) => {
-  console.log("articleList", res.data);
-  console.log("tableData", tableData);
-  tableData.data=res.data
-});
+// articleList({}).then((res: any) => {
+//   tableData.data=res.data
+// });
+
+const aaa=()=>{
+  console.log("富文本内容",content);
+}
 </script>
 <style lang="scss" scoped>
 .home {

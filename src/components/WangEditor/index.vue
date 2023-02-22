@@ -36,12 +36,16 @@ const props=withDefaults(defineProps<RichEditorProps>(),{
             MENU_CONF:{}
         }
     },
+    toolbarConfig: () => {
+		return {
+			excludeKeys: []
+		};
+	},
     height: "500px",
     overflowY:"hidden",
     mode:"default"
 })
 
-console.log("props",props);
 
 type EmitProps = {
 	(e: "update:value", val: string): void;
@@ -53,10 +57,9 @@ const emit = defineEmits<EmitProps>();
 		return props.value;
 	},
 	set(val: string) {
-        console.log("val",val);
-        
+        // console.log("val",val);
 		// 防止富文本内容为空时，校验失败
-		if (editorRef.value.isEmpty()) val = "";
+		// if (editorRef.value.isEmpty()) val = "";
 		emit("update:value", val);
 	}
 });
@@ -65,19 +68,12 @@ const emit = defineEmits<EmitProps>();
 type InsertFnType = (url: string, alt?: string, href?: string) => void
 props.editorConfig.MENU_CONF!["uploadImage"]={
     customInsert(res: any, insertFn: InsertFnType){
-        console.log("res",res);
-        console.log("insertFn",insertFn);
         
     },
     async customUpload(file: File, insertFn: InsertFnType) { 
-        console.log("file",file);
-        console.log("insertFn",insertFn); 
          let fromData=new FormData()
          fromData.append("avatar",file)
         try {
-            // upload(fromData).then(res=>{
-            //     insertFn(res.ingUrl);
-            // }) 
 			const {data} = await upload(fromData)
             insertFn(`http://loclhost:3000${data.url}`);
 		} catch (error) {
@@ -91,22 +87,24 @@ props.editorConfig.MENU_CONF!["uploadImage"]={
     }
 
 }
-// 内容 HTML
-// const valueHtml = ref('<p>hello</p>')
 
-// 模拟 ajax 异步获取内容
-// onMounted(() => {
-//     setTimeout(() => {
-//         valueHtml.value = '<p>模拟 Ajax 异步设置内容</p>'
-//     }, 1500)
-// })
 
+
+// 编辑框失去焦点时触发
+const handleBlur = () => {
+	emit("check-validate");
+};
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
-    const editor = editorRef.value
-    if (editor == null) return
-    editor.destroy()
+    // const editor = editorRef.value
+    // if (editor == null) return
+    // editor.destroy()
+    if (!editorRef.value) return;
+	editorRef.value.destroy();
 })
 
+defineExpose({
+	editor: editorRef
+});
 </script>

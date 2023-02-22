@@ -8,6 +8,8 @@
 import {ref} from "vue"
 import WangEditor from "@/components/WangEditor/index.vue";
 const value =ref("小美")
+console.log("富文本内容",value);
+
 </script>
 <style lang="scss" scoped>
 .home {
