@@ -1,14 +1,11 @@
 <template>
     <div class="home">
         欢迎来到我的主页111888
-		<WangEditor v-model:value="value"/>
     </div>
 </template>
 <script lang="ts" setup name="WangEditor">
 import {ref} from "vue"
-import WangEditor from "@/components/WangEditor/index.vue";
 const value =ref("小美")
-console.log("富文本内容",value);
 
 </script>
 <style lang="scss" scoped>

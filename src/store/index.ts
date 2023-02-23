@@ -1,6 +1,6 @@
 import { defineStore ,createPinia} from "pinia"
 import { counterState } from "./interface/index"
-import {setStorage,getStorage} from "@/utils/index"
+import {setStorage,getStorage,removeStorage} from "@/utils/index"
 export const GlobalStore = defineStore("counterState", {
     state: (): counterState => {
         return {
@@ -12,17 +12,20 @@ export const GlobalStore = defineStore("counterState", {
     actions: {
         //setToken
         setToken(token: string) {
-            console.log("token",token);
             setStorage("token",token)
             this.token = token
             
         },
         // setUserInfo
         setUserInfo(userInfo: any) {
-            console.log("userInfo",userInfo);
             this.userInfo = userInfo;
             setStorage("userInfo",userInfo)
         },
+        //removeUser at Tokn
+        removeUser(){
+            removeStorage("token")
+            removeStorage("userInfo")
+        }
     }
 })
 const pinia =createPinia()

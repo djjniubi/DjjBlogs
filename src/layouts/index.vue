@@ -4,7 +4,8 @@
         <el-aside width="200px">
             <div class="nav-menu">
                 <el-scrollbar >
-                   <el-menu :router="true" background-color="#545c64" text-color="#fff">
+                   <el-menu class="el-menu-vertical-demo" :default-active="router.currentRoute.value.fullPath" active-text-color="#79bbff" :router="true" background-color="#545c64" text-color="#fff"  @open="handleOpen"
+                   @close="handleClose">
                     <NavMenu :menuList="menuList"/>
                    </el-menu>
                 </el-scrollbar>
@@ -28,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue"
 import NavMenu from './components/Menu/NavMenu.vue';
 import ToolBarLeft from "./components/Header/ToolBarLeft.vue"
 import ToolBarRight from "./components/Header/ToolBarRight.vue"
@@ -35,11 +37,17 @@ import {useRouter,useRoute } from "vue-router"
 import {dynamic} from "../route/modules/dynamicRoute"
 import Main from "./components/Main/Main.vue"
 const router = useRouter();
-console.log("router",router);
+ console.log("router2222",router.currentRoute.value.fullPath
+)
 const menuList:object[]=dynamic
-    const route = useRoute()
-    const modules=import.meta.glob("../view/**/*.vue")
-console.log("modules",modules);
+const route = useRoute()
+const activeIndex=ref("0")
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log("handleOpen",key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log("handleClose",key, keyPath)
+}
 </script>
 
 <style lang="scss" scoped>
