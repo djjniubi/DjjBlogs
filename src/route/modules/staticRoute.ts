@@ -12,13 +12,12 @@ import {RouteRecordRaw} from "vue-router"
 export const staticRouter:Array<RouteRecordRaw>=[
     {
         path:"/",
-        redirect:"/login",
-        
-        children:[
-            {path:"/login",
-            component:()=> import("@/view/login/index.vue")
-           }
-        ]
+        redirect:"/home/index"
+    },
+    {
+       path:"/login",
+        name:"login",
+        component:()=>import("@/view/login/index.vue")
     },
     {
         path:"/404",

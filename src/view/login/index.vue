@@ -139,7 +139,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (valid) {
       console.log("ruleForm",ruleForm);
       if(ruleForm["code"]!==code.value){
-          
+        ElMessage({
+            message:"验证码验证失败",
+                type:"error"
+          })
+          ruleForm.code=""
       }else{
         userLogin(ruleForm).then((res:any)=>{
           if(res["code"]===200){
@@ -191,7 +195,9 @@ const submitSignUp= async (formEl: FormInstance | undefined)=>{
 const codeSvg = () => {
   codeCaptcha().then((res:any) => {
     code.value = res["text"];
-    svg.value=res["data"]
+    svg.value=res["data"];
+    // console.log("res",res);
+    
   });
 };
 codeSvg();

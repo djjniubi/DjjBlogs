@@ -12,6 +12,7 @@ export function articleAdd(data:any){
     return http.request({
         url:"/api/article/add",
         method:"post",
+        data
     })
 }
 
@@ -34,7 +35,16 @@ export function articleDelete(id:any){
 //文章详情  /api/article/particulars/:id
 export function articleParticulars(id:any){
     return http.request({
-        url:`/api/article/particulars${id}`,
+        url:`/api/article/particulars/${id}`,
+        method:"GET",
+    })
+}
+
+//文章分类列表 /api/categories/list
+
+export function categoriesList(query:any){
+    return http.request({
+        url:`/api/categories/list`,
         method:"GET",
     })
 }

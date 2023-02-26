@@ -1,8 +1,11 @@
 import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
-import {setStorage,getStorage} from "@/utils/index"
+import {setStorage,getStorage,removeStorage} from "@/utils/index"
 import {ResultEnum} from "@/enums/httpEnums"
 import {errorType} from "@/requer/errorType"
+import {GlobalStore} from "@/store"
+import router from "@/route"
+const globalStore=GlobalStore()
 const config ={
     baseURL:import.meta.env.VITE_API_URL as string,
     timeout:ResultEnum.TIMEOUT as number,
@@ -22,13 +25,14 @@ http.interceptors.request.use((config)=>{
 
 //响应拦截
 http.interceptors.response.use((response:AxiosResponse)=>{
-    console.log("response",document.cookie.split(""));
-    
+    console.log("response",document.cookie.split(" "));
+    let message = ''
     const {data} =response
     if(data.code==200){
         return data
     }else{
-        errorType(data?.code)
+        message =  errorType(data?.code)
+        globalStore.removeUser()
     }
 },(error:AxiosError)=>{
     let message = ''
@@ -38,6 +42,8 @@ http.interceptors.response.use((response:AxiosResponse)=>{
     switch (status) {
         case 401:
             message="登入过期,请重新登入"
+            globalStore.removeUser()
+            router.push("/login")
             break;
     
         default:

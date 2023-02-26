@@ -24,7 +24,7 @@ const  newRuoteAll=viewAllArr.map(([pagePath,config])=>{
     return masterObj
 })
 const  newNav=viewAllArr.map(([pagePath,config])=>{
-    let path = pagePath.replace("/src/view","").replace("/page.ts","/index");
+    let path:any = pagePath.replace("/src/view","").replace("/page.ts","/index");
         path=path|| "/"
     const name =path.split("/").filter(Boolean).join("-")||"index"
     const compPath=pagePath.replace("page.ts","index.vue")
@@ -43,6 +43,8 @@ function fun(a:any,b:any){
 }
 //动态路由  路由接口参数 (导航格式)
 export const dynamic=newNav.sort(fun)
+console.log("newRuoteAll",newRuoteAll);
+
 //路由格式
 export const dynamicRouter:Array<RouteRecordRaw>=newRuoteAll.sort(fun)
 // export const dynamic=[{
