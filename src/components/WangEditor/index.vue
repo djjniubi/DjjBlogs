@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="['editor-disabled']">
         <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode">
         </Toolbar>
         <Editor :style="{height,overflowY}" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode"
@@ -33,7 +33,7 @@ const props=withDefaults(defineProps<RichEditorProps>(),{
     editorConfig:()=>{
         return {
             placeholder:"请输入内容" ,
-            MENU_CONF:{}
+            MENU_CONF:{},
         }
     },
     toolbarConfig: () => {
@@ -108,3 +108,6 @@ defineExpose({
 	editor: editorRef
 });
 </script>
+<style lang="scss" scoped>
+@import "./index.scss"
+</style>

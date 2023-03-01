@@ -1,9 +1,11 @@
 import http from "@/requer";
 //获取文章列表 /api/article/list
 export function articleList(data:any){
+    console.log("articleList",data);
     return http.request({
         url:"/api/article/list",
         method:"GET",
+        params:data,
     })
 }
 
@@ -21,13 +23,14 @@ export function articleUpdate(data:any){
     return http.request({
         url:"/api/article/update",
         method:"put",
+        data
     })
 }
 
 //删除文章  /api/article/delete/:id
 export function articleDelete(id:any){
     return http.request({
-        url:`/api/article/delete${id}`,
+        url:`/api/article/delete/${id}`,
         method:"DELETE",
     })
 }
@@ -46,5 +49,6 @@ export function categoriesList(query:any){
     return http.request({
         url:`/api/categories/list`,
         method:"GET",
+        data:query
     })
 }

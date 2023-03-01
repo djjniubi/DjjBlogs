@@ -11,7 +11,7 @@ const config ={
     timeout:ResultEnum.TIMEOUT as number,
 }
 const http:AxiosInstance=axios.create(config)
-// http.defaults.withCredentials=true
+http.defaults.withCredentials=true
 //请求拦截
 http.interceptors.request.use((config)=>{
     const token = getStorage("token")
@@ -28,11 +28,16 @@ http.interceptors.response.use((response:AxiosResponse)=>{
     console.log("response",document.cookie.split(" "));
     let message = ''
     const {data} =response
-    if(data.code==200){
+    const {code} =data
+    // return data
+    if(code==200){
         return data
-    }else{
-        message =  errorType(data?.code)
+    }else if(code==401){
+        // message =  errorType(code)
         globalStore.removeUser()
+    }else if(code==404){
+        message=data.message
+        return data
     }
 },(error:AxiosError)=>{
     let message = ''

@@ -138,14 +138,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
    
     if (valid) {
       console.log("ruleForm",ruleForm);
-      if(ruleForm["code"]!==code.value){
-        ElMessage({
-            message:"验证码验证失败",
-                type:"error"
-          })
-          ruleForm.code=""
-      }else{
-        userLogin(ruleForm).then((res:any)=>{
+
+      userLogin(ruleForm).then((res:any)=>{
+        console.log("userLogin",res);
           if(res["code"]===200){
             ElMessage({
             message:"登入成功",
@@ -154,10 +149,17 @@ const submitForm = async (formEl: FormInstance | undefined) => {
           globalStore.setToken(res["token"])
           globalStore.setUserInfo(res["userinfo"])
           router.push("/")
+          }else if(res["code"]===404){
+            ElMessage({
+            message:res.message,
+                type:"error"
+          })
+            res.message.includes("验证码")?ruleForm.code="":""
           }
-         
+        }).catch((error)=>{
+          console.log("错误",error);
+          
         })
-      }
        
     } else {
       console.log("error submit!", fields);
