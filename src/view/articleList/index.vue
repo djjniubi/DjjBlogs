@@ -14,7 +14,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="文章状态">
-          <el-input v-model="formLabelAlign.state" />
+          <el-select v-model="formLabelAlign.state" placeholder="文章状态">
+            <el-option label="" value="" />
+            <el-option label="已发布" value="1" />
+            <el-option label="未发布" value="0" />
+          </el-select>
         </el-form-item>
         <el-form-item>
           <div>
@@ -35,7 +39,10 @@
       <el-table-column label="标题" prop="title" min-width="120" />
       <el-table-column label="类型" prop="postType" min-width="120">
         <template #default="scope">
-          <span>{{ scope.row.postType}}</span>
+          <!-- <span>{{ scope.row.postType}}</span> -->
+          <div v-for="(cItem,cIndex) in categories.data" :key="cIndex">
+            <span>{{ cItem.categoriesCode==scope.row.postType?cItem.categoriesName:""}}</span>
+          </div>
         </template>
       </el-table-column>
       <el-table-column label="发布者" prop="promulgatorName" min-width="120" />
@@ -53,7 +60,8 @@
           <el-button icon="Search" @click="clickInfo(scope.row)">详情</el-button>
           <el-button type="warning" icon="Edit" @click="clickUpdate(scope.row)">修改</el-button>
           <el-button type="danger" icon="Delete" @click="clickDel(scope.row)">删除</el-button>
-          <el-button v-if="scope.row.state == '0' || 0" type="primary" icon="Check">发布</el-button>
+          <el-button v-if="scope.row.state == '0' || 0" type="primary" icon="Check" @click="publish(scope.row)
+">发布</el-button>
           <el-button v-else type="danger" icon="Check">下架</el-button>
         </template>
       </el-table-column>
@@ -135,7 +143,6 @@ const formLabelAlign = reactive({
   title: "",
   state: "",
   postType: "",
-  promulgatorName: "",
   pageNum:1,
   pageSize:10
 });
@@ -169,7 +176,7 @@ const list = (data:any) => {
     tableData.data = res.data
   });
 }
-list(ruleForm)
+list(formLabelAlign)
 
 //确认
 const submitForm = async (formEl: FormInstance | undefined) => {
@@ -258,6 +265,25 @@ const clickDel = (data: any) => {
   })
 
 }
+
+//发布
+const publish = (data:any)=>{
+   console.log("发布",data,data.id=data["_id"]);
+   data.id=data["_id"]
+   data.state=1
+   articleUpdate(data).then((res)=>{
+    ElMessage({
+              message: "发布成功",
+              type: "success"
+            })
+   }).catch((error)=>{
+    ElMessage({
+              message: "发布失败",
+              type: "error"
+            })
+   })
+}
+
 const search=()=>{
   list(formLabelAlign)
 }
