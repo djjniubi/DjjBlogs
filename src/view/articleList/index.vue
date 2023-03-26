@@ -40,8 +40,8 @@
       <el-table-column label="类型" prop="postType" min-width="120">
         <template #default="scope">
           <!-- <span>{{ scope.row.postType}}</span> -->
-          <div v-for="(cItem,cIndex) in categories.data" :key="cIndex">
-            <span>{{ cItem.categoriesCode==scope.row.postType?cItem.categoriesName:""}}</span>
+          <div v-for="(cItem, cIndex) in categories.data" :key="cIndex">
+            <span>{{ cItem.categoriesCode == scope.row.postType ? cItem.categoriesName : "" }}</span>
           </div>
         </template>
       </el-table-column>
@@ -50,7 +50,7 @@
       <el-table-column label="发布状态" prop="state" min-width="120">
         <template #default="scope">
           <el-row>
-            <el-tag v-if="scope.row.state !== '0' || 0" class="mx-1" type="success">已发布</el-tag>
+            <el-tag v-if="scope.row.state != '0' || 0" class="mx-1" type="success">已发布</el-tag>
             <el-tag v-else class="mx-1" type="danger">未发布</el-tag>
           </el-row>
         </template>
@@ -61,15 +61,15 @@
           <el-button type="warning" icon="Edit" @click="clickUpdate(scope.row)">修改</el-button>
           <el-button type="danger" icon="Delete" @click="clickDel(scope.row)">删除</el-button>
           <el-button v-if="scope.row.state == '0' || 0" type="primary" icon="Check" @click="publish(scope.row)
-">发布</el-button>
-          <el-button v-else type="danger" icon="Check">下架</el-button>
+          ">发布</el-button>
+          <el-button v-else type="danger" icon="Check" @click="publish(scope.row)">下架</el-button>
         </template>
       </el-table-column>
     </el-table>
   </div>
 
   <!-- 新增 -->
-  <el-dialog v-model="dialogVisible" title="新增文章" width="80%">
+  <el-dialog v-model="dialogVisible" title="新增文章" width="80%" @close="close">
     <div>
       <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm"
         :size="formSize" status-icon>
@@ -111,7 +111,7 @@ const globalStore = GlobalStore()
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
 const disabled = ref(false)
-const ruleForm = reactive({
+let ruleForm = reactive({
   title: "",
   content: "",
   promulgatorName: "",
@@ -120,8 +120,8 @@ const ruleForm = reactive({
   postType: "",
   state: "",
   id: "",
-  pageNum:1,
-  pageSize:10
+  pageNum: 1,
+  pageSize: 10
 });
 const addAnUpdate = ref("add")
 const rules = reactive<FormRules>({
@@ -143,8 +143,8 @@ const formLabelAlign = reactive({
   title: "",
   state: "",
   postType: "",
-  pageNum:1,
-  pageSize:10
+  pageNum: 1,
+  pageSize: 10
 });
 //表格接口
 interface Article {
@@ -170,14 +170,30 @@ let tableData: { data: Article[] } = reactive({
 let categories: { data: [any] } = reactive({ data: [{}] })
 //对话框
 const dialogVisible = ref(false);
-const list = (data:any) => {
+const list = (data: any) => {
   console.log("list", data);
   articleList(data).then((res: any) => {
     tableData.data = res.data
   });
 }
 list(formLabelAlign)
-
+/** 初始化数据 */
+const init = () => {
+  addAnUpdate.value = "add"
+  dialogVisible.value = false;
+  disabled.value = false;
+  ruleForm.content = "";
+  ruleForm.title = "";
+  ruleForm.promulgatorName = "";
+  ruleForm.creationTime = "";
+  ruleForm.modificationTime = "";
+  ruleForm.postType = "";
+  ruleForm.state = "";
+  ruleForm.id = "";
+  ruleForm.pageNum = 1;
+  ruleForm.pageSize = 10;
+  content.value = ""
+}
 //确认
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
@@ -236,12 +252,12 @@ const clickInfo = (data: any) => {
 const clickUpdate = (data: any) => {
   dialogVisible.value = true
   const { _id, promulgatorName, creationTime, modificationTime } = data
-  ruleForm["title"] = data["title"]
-  ruleForm["postType"] = data["postType"]
+  ruleForm.title = data["title"]
+  ruleForm.postType = data["postType"]
   content.value = data["content"]
-  ruleForm["creationTime"] = creationTime
-  ruleForm["promulgatorName"] = promulgatorName
-  ruleForm["id"] = _id
+  ruleForm.creationTime = creationTime
+  ruleForm.promulgatorName = promulgatorName
+  ruleForm.id = _id
   addAnUpdate.value = "update"
 }
 
@@ -258,7 +274,6 @@ const clickDel = (data: any) => {
             message: "删除失败",
             type: "error"
           })
-
         })
       }
     }
@@ -267,24 +282,43 @@ const clickDel = (data: any) => {
 }
 
 //发布
-const publish = (data:any)=>{
-   console.log("发布",data,data.id=data["_id"]);
-   data.id=data["_id"]
-   data.state=1
-   articleUpdate(data).then((res)=>{
-    ElMessage({
-              message: "发布成功",
-              type: "success"
-            })
-   }).catch((error)=>{
-    ElMessage({
-              message: "发布失败",
-              type: "error"
-            })
-   })
+const publish = (data: any) => {
+  data.id = data["_id"]
+  const stateFn = {
+    "0": () => {
+      data.state = 1; articleUpdate(data).then((res) => {
+        ElMessage({
+          message: "发布成功",
+          type: "success"
+        })
+      }).catch((error) => {
+        ElMessage({
+          message: "发布失败",
+          type: "error"
+        })
+      })
+    },
+    "1": () => {
+      data.state = 0; articleUpdate(data).then((res) => {
+        ElMessage({
+          message: "下架成功",
+          type: "success"
+        })
+      }).catch((error) => {
+        ElMessage({
+          message: "下架失败",
+          type: "error"
+        })
+      })
+    }
+  }
+  stateFn[data.state as keyof typeof stateFn]()
 }
-
-const search=()=>{
+/** 关闭弹窗要处理的数据状态 */
+const close = () => {
+  init()
+}
+const search = () => {
   list(formLabelAlign)
 }
 categoriesList({}).then(res => {
@@ -311,5 +345,4 @@ categoriesList({}).then(res => {
 
 .btn-group {
   padding: 0 20px;
-}
-</style>
+}</style>

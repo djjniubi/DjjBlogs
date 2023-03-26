@@ -4,7 +4,7 @@
         <el-aside width="200px">
             <div class="nav-menu">
                 <el-scrollbar >
-                   <el-menu class="el-menu-vertical-demo" :default-active="router.currentRoute.value.fullPath" active-text-color="#79bbff" :router="true" background-color="#545c64" text-color="#fff"  @open="handleOpen"
+                   <el-menu class="el-menu-vertical-demo" :collapse="themeConfig.isCollapse" :default-active="router.currentRoute.value.fullPath" active-text-color="#79bbff" :router="true" background-color="#545c64" text-color="#fff"  @open="handleOpen"
                    @close="handleClose">
                     <NavMenu :menuList="menuList"/>
                    </el-menu>
@@ -29,17 +29,21 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue"
+import {ref,computed} from "vue"
 import NavMenu from './components/Menu/NavMenu.vue';
 import ToolBarLeft from "./components/Header/ToolBarLeft.vue"
 import ToolBarRight from "./components/Header/ToolBarRight.vue"
 import {useRouter,useRoute } from "vue-router"
 import {dynamic} from "../route/modules/dynamicRoute"
 import Main from "./components/Main/Main.vue"
+import {GlobalStore} from "@/store"
 const router = useRouter();
  console.log("router2222",router.currentRoute.value.fullPath
 )
 const menuList:object[]=dynamic
+console.log("menuList",menuList);
+const globalStore =GlobalStore()
+const themeConfig =computed(()=>globalStore.themeConfig)
 const route = useRoute()
 const activeIndex=ref("0")
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -51,21 +55,62 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style lang="scss" scoped>
-.nav-menu{
-    width:  210px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease;
-    background-color: #545c64;
-    .el-scrollbar {
+.el-container {
+	width: 100%;
+	height: 100%;
+	.el-aside {
+		width: auto;
+		overflow: inherit;
+		background-color: #191a20;
+		border-right: 1px solid #191a20;
+		.nav-menu {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			transition: all 0.3s ease;
+			.el-scrollbar {
 				height: calc(100% - 55px);
 				.el-menu {
 					overflow-x: hidden;
 					border-right: none;
 				}
 			}
+			.logo {
+				box-sizing: border-box;
+				height: 55px;
+				border-bottom: 1px solid #282a35;
+				span {
+					font-size: 21.5px;
+					font-weight: bold;
+					color: #dadada;
+					white-space: nowrap;
+				}
+				img {
+					width: 28px;
+					object-fit: contain;
+					margin-right: 6px;
+				}
+			}
+		}
+	}
+	.el-header {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 55px;
+		padding: 0 15px;
+		background-color: #ffffff;
+		border-bottom: 1px solid #f1f1f1;
+		:deep(.tool-bar-ri) {
+			.toolBar-icon,
+			.username {
+				color: var(--el-text-color-primary);
+			}
+		}
+	}
 }
+
 .el-container{
     width: 100%;
     height: 100%;

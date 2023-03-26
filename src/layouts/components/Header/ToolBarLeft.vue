@@ -1,10 +1,11 @@
 <template>
     <div class="tool-bar-left">
-        <el-icon>
-            <fold />
-        </el-icon>
+        <FoldCollapse id="FoldCollapse"/>
     </div>
 </template>
+<script setup lang="ts">
+import FoldCollapse from "./components/FoldController.vue"
+</script>
 <style lang="scss" scoped>
 .tool-bar-left{
     display: flex;

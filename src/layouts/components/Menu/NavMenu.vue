@@ -5,16 +5,17 @@
                 <el-icon>
                     <component :is="item.meta.icon"></component>
                 </el-icon>
-                <span>{{item.name}}</span>
+                <span>{{item.meta.title}}</span>
               </template>
-              <el-menu-item index="1-1">item one</el-menu-item>
+              <el-menu-item :index="cItem.path" v-for="(cItem,cIndex) in item.children" :key="cItem.path">{{ cItem.title }}</el-menu-item>
         </el-sub-menu>
         <el-menu-item  v-else :index="item.path" @click="clickMenu(item)">
-            <template #title>
-                <el-icon>
+            <el-icon>
                     <component :is="item.meta.icon"></component>
                 </el-icon>
-                <span>{{ item.meta.title }}</span>
+            <template #title>
+                
+                <span>{{ item.meta.title}}</span>
             </template>
         </el-menu-item>
     </template>

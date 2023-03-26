@@ -1,9 +1,15 @@
 import {RouteRecordRaw} from "vue-router"
 import layouts from "@/layouts/index.vue"
+type Config ={
+    title:String,
+    icon:String,
+    menuOrder:Number,
+    children?:[]
+}
 /**
  * @param name ==>  菜单名
  * @param path  ==> 菜单路径
- * @param mera  ==>  菜单信息
+ * @param meta  ==>  菜单信息
  * @param component  ==>组件路径
  * @param  children  ==>子路由
  */
@@ -13,28 +19,37 @@ import layouts from "@/layouts/index.vue"
 const viewPageAll=import.meta.glob("/src/view/**/page.ts",{eager:true,import:"default"})
 const viewAll=import.meta.glob("/src/view/**/*index.vue")
 const viewAllArr=Object.entries(viewPageAll)
-const  newRuoteAll=viewAllArr.map(([pagePath,config])=>{
+
+/*路由*/
+const  newRuoteAll=viewAllArr.map(([pagePath,config]:any)=>{
     let path = pagePath.replace("/src/view","").replace("/page.ts","/index");
         path=path|| "/"
     const name =path.split("/").filter(Boolean).join("-")||"index"
     const compPath=pagePath.replace("page.ts","index.vue")
     let masterObj:any={path,name,component:layouts,meta: config,children:[]}
-    let sonObj={path,name,component: viewAll[compPath],meta: config,children:[]}
+    let sonObj={path,name,component: viewAll[compPath],meta: config,children:config.children?config.children:[]}
+    if(config.children){
+        console.log("config66",config);
+    }
     masterObj.children.push(sonObj)
     return masterObj
 })
-const  newNav=viewAllArr.map(([pagePath,config])=>{
+/* 导航 */ 
+const  newNav=viewAllArr.map(([pagePath,config]:any)=>{
     let path:any = pagePath.replace("/src/view","").replace("/page.ts","/index");
         path=path|| "/"
     const name =path.split("/").filter(Boolean).join("-")||"index"
     const compPath=pagePath.replace("page.ts","index.vue")
-
+    if(config.children){
+       console.log("config",config);
+       console.log("pagePath",pagePath);
+    }
     return {
         path,
         name,
         component: viewAll[compPath],  
         meta: config,
-        children:[]
+        children:config.children?config.children:[]
     }
 })
 //对路由进行排序
@@ -43,10 +58,11 @@ function fun(a:any,b:any){
 }
 //动态路由  路由接口参数 (导航格式)
 export const dynamic=newNav.sort(fun)
-console.log("newRuoteAll",newRuoteAll);
+
 
 //路由格式
 export const dynamicRouter:Array<RouteRecordRaw>=newRuoteAll.sort(fun)
+console.log("newRuoteAll",newRuoteAll);
 // export const dynamic=[{
 //     name:"首页",
 //     path:"/home/index",
