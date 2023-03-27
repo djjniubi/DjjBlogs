@@ -1,10 +1,12 @@
 <template>
     <div class="tool-bar-left">
         <FoldCollapse id="FoldCollapse"/>
+        <!-- <Breadcrumb></Breadcrumb> -->
     </div>
 </template>
 <script setup lang="ts">
-import FoldCollapse from "./components/FoldController.vue"
+import FoldCollapse from "./components/FoldController.vue";
+// import Breadcrumb from "./components/Breadcrumb.vue"
 </script>
 <style lang="scss" scoped>
 .tool-bar-left{

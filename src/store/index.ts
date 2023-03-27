@@ -9,8 +9,18 @@ export const GlobalStore = defineStore({
                 userInfo:getStorage("userInfo")|| "",
                 // themeConfig
                 themeConfig:{
+                    //布局方式  纵向  lengthways  |  经典  classics  |  横向 crosswise  |  分栏  subfield
+                    layouts:"lengthways",
                     //折叠菜单
-                    isCollapse:false
+                    isCollapse:false,
+                    //主题颜色
+                    themeColor:"#409EFF",
+                    //暗黑模式
+                    isDarkness:false,
+                    //灰色模式
+                    isGray:false,
+                    //色弱模式
+                    isColorWeakness:false
                 }
         }) ,
     getters: {},

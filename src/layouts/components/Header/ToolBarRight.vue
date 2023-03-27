@@ -1,7 +1,8 @@
 <template>
     <div class="tool-bar-r">
         <div>
-
+            <MyTheme/>
+            <ThemeDrawer/>
         </div>
        <span class="username">admin</span>
        <div class="avatar">
@@ -9,6 +10,10 @@
 		</div>
     </div>
 </template>
+<script setup lang="ts">
+import  MyTheme from './components/MyTheme.vue';
+import  ThemeDrawer from '../../ThemeDrawer/index.vue'
+</script>
 <style lang="scss" scoped>
 .tool-bar-r{
     display: flex;

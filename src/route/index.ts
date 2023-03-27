@@ -12,28 +12,28 @@ const router = createRouter({
 //设置白名单
 const whiteList:string[]=["/login"]
 
-router.beforeEach(async(to,from,next)=>{
+// router.beforeEach(async(to,from,next)=>{
     
-    const token =getStorage("token")
-    if(token){
-        if(to.path==="/login"||to.path==="/"){
-            next()
-        }else{
-            next()
-        }
+//     const token =getStorage("token")
+//     if(token){
+//         if(to.path==="/login"||to.path==="/"){
+//             next()
+//         }else{
+//             next()
+//         }
         
-    }else{
-        if(whiteList.indexOf(to.path) !== -1){
-            next() 
-        }else{
-            ElMessage({
-                message:"登录已过期，请重新登录！",
-                type:"error"
-            })
+//     }else{
+//         if(whiteList.indexOf(to.path) !== -1){
+//             next() 
+//         }else{
+//             ElMessage({
+//                 message:"登录已过期，请重新登录！",
+//                 type:"error"
+//             })
     
-            next(`/login?redirect=${to.path}`)
-        }
+//             next(`/login?redirect=${to.path}`)
+//         }
         
-    }
-})
+//     }
+// })
 export default router

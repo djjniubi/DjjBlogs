@@ -1,6 +1,11 @@
 /** themeConfigType */
 export interface ThemeConfigType{
-    isCollapse:boolean
+    layouts:string,
+    isCollapse:boolean,
+    themeColor:string,
+    isDarkness:boolean,
+    isGray:boolean,
+    isColorWeakness:boolean
 }
 
 /*counterState*/

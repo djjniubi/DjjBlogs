@@ -100,8 +100,8 @@ const handleClose = (key: string, keyPath: string[]) => {
 		justify-content: space-between;
 		height: 55px;
 		padding: 0 15px;
-		background-color: #ffffff;
-		border-bottom: 1px solid #f1f1f1;
+		//background-color: #ffffff;
+		//border-bottom: 1px solid #f1f1f1;
 		:deep(.tool-bar-ri) {
 			.toolBar-icon,
 			.username {

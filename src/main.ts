@@ -1,12 +1,16 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import './style.css';
+import App from './App.vue';
 //ElementPlus
-import ElementPlus from "element-plus"
+import ElementPlus from "element-plus";
 //ElementPlus css
-import "element-plus/dist/index.css"
+import "element-plus/dist/index.css";
 //element icon
-import * as Icons from '@element-plus/icons-vue'
+import * as Icons from '@element-plus/icons-vue';
+//icon
+import "@/assets/icon/iconfont.scss";
+//element (内置的暗黑模式)
+import 'element-plus/theme-chalk/dark/css-vars.css'
 //router
 import router from './route'
 import pinia from "@/store"
