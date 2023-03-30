@@ -1,7 +1,8 @@
 <template>
     <div class="tool-bar-r">
-        <div>
+        <div style="display:flex ;">
             <MyTheme/>
+            <ThemeSwitch/>
             <ThemeDrawer/>
         </div>
        <span class="username">admin</span>
@@ -12,7 +13,8 @@
 </template>
 <script setup lang="ts">
 import  MyTheme from './components/MyTheme.vue';
-import  ThemeDrawer from '../../ThemeDrawer/index.vue'
+import ThemeSwitch from "@/components/ThemeSwitch/index.vue";
+import  ThemeDrawer from '../../ThemeDrawer/index.vue';
 </script>
 <style lang="scss" scoped>
 .tool-bar-r{

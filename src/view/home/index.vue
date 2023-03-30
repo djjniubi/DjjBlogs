@@ -15,7 +15,7 @@ const value =ref("小美")
 	justify-content: center;
 	width: 100%;
 	height: 100%;
-    background-color: #fff;
+    //background-color: #fff;
 	.home-bg {
 		width: 70%;
 		margin-bottom: 20px;

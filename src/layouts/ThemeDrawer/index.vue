@@ -56,11 +56,11 @@
         </div>
         <div class="theme_item">
             <span>灰色模式</span>
-            <el-switch v-model="themeConfig.isGray" />
+            <el-switch v-model="themeConfig.isGray" @change="change('isGray')" />
         </div>
         <div class="theme_item">
             <span>色弱模式</span>
-            <el-switch v-model="themeConfig.isColorWeakness" />
+            <el-switch v-model="themeConfig.isColorWeakness" @change="change('isColorWeakness')"  />
         </div>
     </div>
   </el-drawer>
@@ -70,13 +70,15 @@ import { ref,computed } from "vue";
 import mittBus from "@/utils/mittBus";
 import {GlobalStore} from "@/store";
 import ThemeSwitch from "@/components/ThemeSwitch/index.vue";
+import {customTheme} from "@/hooks/customTheme";
 const globalStore=GlobalStore()
 const themeConfig=computed(()=>globalStore.themeConfig);
 const changLayout=(data:string)=>{globalStore.setThemeConfig({...themeConfig.value,layouts:data})}
 //是否打开抽屉
 const drawer = ref(true);
 mittBus.on("openDrawer", () => (drawer.value = true));
-
+const {switchGray}=customTheme()
+const change=(data:string)=>{switchGray(data)}
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";

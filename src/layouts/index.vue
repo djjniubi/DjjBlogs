@@ -38,14 +38,11 @@ import {dynamic} from "../route/modules/dynamicRoute"
 import Main from "./components/Main/Main.vue"
 import {GlobalStore} from "@/store"
 const router = useRouter();
- console.log("router2222",router.currentRoute.value.fullPath
-)
-const menuList:object[]=dynamic
-console.log("menuList",menuList);
-const globalStore =GlobalStore()
-const themeConfig =computed(()=>globalStore.themeConfig)
-const route = useRoute()
-const activeIndex=ref("0")
+const menuList:object[]=dynamic;
+const globalStore =GlobalStore();
+const themeConfig =computed(()=>globalStore.themeConfig);
+const route = useRoute();
+const activeIndex=ref("0");
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log("handleOpen",key, keyPath)
 }
@@ -69,26 +66,10 @@ const handleClose = (key: string, keyPath: string[]) => {
 			height: 100%;
 			transition: all 0.3s ease;
 			.el-scrollbar {
-				height: calc(100% - 55px);
+				height: 100%;
 				.el-menu {
 					overflow-x: hidden;
 					border-right: none;
-				}
-			}
-			.logo {
-				box-sizing: border-box;
-				height: 55px;
-				border-bottom: 1px solid #282a35;
-				span {
-					font-size: 21.5px;
-					font-weight: bold;
-					color: #dadada;
-					white-space: nowrap;
-				}
-				img {
-					width: 28px;
-					object-fit: contain;
-					margin-right: 6px;
 				}
 			}
 		}
@@ -100,14 +81,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 		justify-content: space-between;
 		height: 55px;
 		padding: 0 15px;
-		//background-color: #ffffff;
-		//border-bottom: 1px solid #f1f1f1;
-		:deep(.tool-bar-ri) {
-			.toolBar-icon,
-			.username {
-				color: var(--el-text-color-primary);
-			}
-		}
+		border-bottom: 1px solid #f1f1f1;
 	}
 }
 
@@ -126,6 +100,5 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 .el-main{
     padding: 10px 12px;
-    background-color: #f0f2f5;
 }
 </style>
