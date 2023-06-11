@@ -3,7 +3,6 @@
         <div style="display:flex ;">
             <MyTheme/>
             <ThemeSwitch/>
-            <ThemeDrawer/>
         </div>
        <span class="username">admin</span>
        <div class="avatar">
@@ -14,7 +13,6 @@
 <script setup lang="ts">
 import  MyTheme from './components/MyTheme.vue';
 import ThemeSwitch from "@/components/ThemeSwitch/index.vue";
-import  ThemeDrawer from '../../ThemeDrawer/index.vue';
 </script>
 <style lang="scss" scoped>
 .tool-bar-r{

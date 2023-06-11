@@ -1,6 +1,7 @@
-import { defineStore ,createPinia} from "pinia"
-import { counterState } from "./interface/index"
-import {setStorage,getStorage,removeStorage} from "@/utils/index"
+import { defineStore ,createPinia} from "pinia";
+import { counterState } from "./interface/index";
+import {setStorage,getStorage,removeStorage} from "@/utils/index";
+import {THEME_COLORS} from "@/config";
 export const GlobalStore = defineStore({
     //id: 必须的 
     id:"GlobalState",
@@ -14,7 +15,7 @@ export const GlobalStore = defineStore({
                     //折叠菜单
                     isCollapse:false,
                     //主题颜色
-                    themeColor:"#409EFF",
+                    themeColor:THEME_COLORS,
                     //暗黑模式
                     isDarkness:false,
                     //灰色模式

@@ -1,3 +1,10 @@
+<!--
+ * @Author: 前端菜鸟-->邓建军
+ * @Date: 2023-03-30 19:34:42
+ * @FilePath: \DjjBlogs\src\layouts\components\ThemeDrawer\index.vue
+ * @LastEditors: djj
+ * @LastEditTime: 2023-06-10 06:05:51
+-->
 <template>
   <el-drawer v-model="drawer" title="" direction="rtl" size="20%">
     <!-- 布局切换 -->
@@ -48,7 +55,7 @@
         <div class="title_item">全局主题</div>
         <div class="theme_item">
             <span>主题颜色</span>
-            <el-color-picker v-model="themeConfig.themeColor" />
+            <el-color-picker v-model="themeConfig.themeColor" @change="setThemeColors" />
         </div>
         <div class="theme_item">
             <span>暗黑模式</span>
@@ -56,11 +63,11 @@
         </div>
         <div class="theme_item">
             <span>灰色模式</span>
-            <el-switch v-model="themeConfig.isGray" @change="change('isGray')" />
+            <el-switch v-model="themeConfig.isGray" @change="switchGray($event,'isGray')" />
         </div>
         <div class="theme_item">
             <span>色弱模式</span>
-            <el-switch v-model="themeConfig.isColorWeakness" @change="change('isColorWeakness')"  />
+            <el-switch v-model="themeConfig.isColorWeakness" @change="switchGray($event,'isColorWeakness')"  />
         </div>
     </div>
   </el-drawer>
@@ -75,10 +82,10 @@ const globalStore=GlobalStore()
 const themeConfig=computed(()=>globalStore.themeConfig);
 const changLayout=(data:string)=>{globalStore.setThemeConfig({...themeConfig.value,layouts:data})}
 //是否打开抽屉
-const drawer = ref(true);
+const drawer = ref(false);
 mittBus.on("openDrawer", () => (drawer.value = true));
-const {switchGray}=customTheme()
-const change=(data:string)=>{switchGray(data)}
+const {switchGray,setThemeColors}=customTheme()
+// const change=(data:string)=>{switchGray(data)}
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";
