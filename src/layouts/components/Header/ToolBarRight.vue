@@ -1,6 +1,12 @@
+<!--
+ * @Description: 
+ * @Author: 邓建军
+ * @Date: 2023-06-12 08:23:52
+ * @LastEditTime: 2023-06-12 14:10:01
+-->
 <template>
     <div class="tool-bar-r">
-        <div style="display:flex ;">
+        <div class="row-center-center">
             <MyTheme/>
             <ThemeSwitch/>
         </div>

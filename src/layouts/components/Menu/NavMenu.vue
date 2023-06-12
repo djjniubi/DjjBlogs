@@ -1,6 +1,12 @@
+<!--
+ * @Description: 
+ * @Author: 邓建军
+ * @Date: 2023-03-27 08:10:53
+ * @LastEditTime: 2023-06-12 16:03:05
+-->
 <template>
     <template v-for="(item,index) in menuList" :key="item.path">
-        <el-sub-menu v-if="item.children.length>0">
+        <el-sub-menu v-if="item.children?.length">
             <template #title>
                 <el-icon>
                     <component :is="item.meta.icon"></component>

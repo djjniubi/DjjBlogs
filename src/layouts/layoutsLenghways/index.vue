@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: 邓建军
+ * @Date: 2023-06-12 08:23:52
+ * @LastEditTime: 2023-06-12 14:15:01
+-->
 <template>
     <el-container>
         <!-- 左侧导航栏 -->
@@ -52,53 +58,5 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style lang="scss" scoped>
-.el-container {
-	width: 100%;
-	height: 100%;
-	.el-aside {
-		width: auto;
-		overflow: inherit;
-		background-color: #191a20;
-		border-right: 1px solid #191a20;
-		.nav-menu {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			transition: all 0.3s ease;
-			.el-scrollbar {
-				height: 100%;
-				.el-menu {
-					overflow-x: hidden;
-					border-right: none;
-				}
-			}
-		}
-	}
-	.el-header {
-		box-sizing: border-box;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 55px;
-		padding: 0 15px;
-		border-bottom: 1px solid #f1f1f1;
-	}
-}
-
-.el-container{
-    width: 100%;
-    height: 100%;
-    .el-aside{
-        width: auto;
-        overflow: inherit;
-    }
-    .el-header{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-}
-.el-main{
-    padding: 10px 12px;
-}
+@import "./index.scss"
 </style>
