@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 14:13:30
- * @LastEditTime: 2023-06-12 16:25:09
+ * @LastEditTime: 2023-06-13 09:05:56
 -->
 <template>
   <!-- 分栏布局 -->
@@ -21,8 +21,8 @@
             </div>
         </el-scrollbar>
     </div>
-    <el-aside :class="{'no-aside':!subMenuList.length}">
-       <el-menu>
+    <el-aside :class="{'no-aside':!subMenuList.length}" :style="{ width: themeConfig.isCollapse ? '65px' : '210px' }">
+       <el-menu :collapse="themeConfig.isCollapse" :default-active="route.currentRoute.value.fullPath" :unique-opened="true">
         <NavMenu :menuList="subMenuList"></NavMenu>
        </el-menu>
     </el-aside>
@@ -36,27 +36,24 @@
   </el-container>
 </template>
 <script setup lang="ts">
-import {ref,watch} from "vue";
-import {useRoute} from "vue-router";
+import {ref,watch,computed} from "vue";
+import {useRoute,useRouter} from "vue-router";
 import NavMenu from "../components/Menu/NavMenu.vue";
 import ToolBarLeft from "../components/Header/ToolBarLeft.vue";
 import ToolBarRight from "../components/Header/ToolBarRight.vue";
 import Main from "../components/Main/Main.vue";
 import {dynamic} from "@/route/modules/dynamicRoute";
-const route=useRoute()
+import { GlobalStore } from "@/store";
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
+const route=useRouter()
+console.log("route",route);
+
 const menuList= dynamic;
 const subMenuList=ref<any>([])
-    watch(()=>[route],()=>{
-    console.log("66666");
-    
-   })
 const fatherMenu =(data: any)=>{
- 
     if(data.children) {
         subMenuList.value=data.children
-        console.log("fatherMenu",data);
-        console.log("subMenuList",subMenuList.value);
-        
     }
 }
 </script>

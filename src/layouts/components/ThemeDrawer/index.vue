@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟-->邓建军
  * @Date: 2023-03-30 19:34:42
  * @FilePath: \DjjBlogs\src\layouts\components\ThemeDrawer\index.vue
- * @LastEditors: djj
- * @LastEditTime: 2023-06-10 06:05:51
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-06-13 09:36:15
 -->
 <template>
   <el-drawer v-model="drawer" title="" direction="rtl" size="20%">
@@ -33,22 +33,22 @@
         </div>
      </el-tooltip>
      <!-- 横向布局 -->
-     <el-tooltip effect="dark" content="横向" placement="top" :show-after="200">
+     <!-- <el-tooltip effect="dark" content="横向" placement="top" :show-after="200">
         <div class="layouts-item crosswise" @click="changLayout('crosswise')">
            <div class="layouts-nav"></div>
            <div class="layouts-conten"></div>
            <el-icon class="okIcon" v-if="themeConfig.layouts==='crosswise'"><CircleCheckFilled /></el-icon>
         </div>
-     </el-tooltip>
+     </el-tooltip> -->
      <!-- 分栏布局 -->
-     <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
+     <!-- <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
         <div class="layouts-item subfield" @click="changLayout('subfield')">
            <div class="layouts-nav"></div>
            <div class="layouts-tow"></div>
            <div class="layouts-conten"></div>
            <el-icon class="okIcon" v-if="themeConfig.layouts==='subfield'"><CircleCheckFilled /></el-icon>
         </div>
-     </el-tooltip>
+     </el-tooltip> -->
     </div>
     <!-- 全局主题 -->
     <div>

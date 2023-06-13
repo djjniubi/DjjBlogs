@@ -35,11 +35,21 @@
                 background-color: #292b35; 
             }
         }
+
     }
    
    } 
-
+   
    .no-aside{
     width: 0 !important; 
+   }
+   .el-aside{
+    height: 100%;
+    border-right: 1px solid var(--el-border-color-light);
+    transition: all 0.3s ease;
+    .el-menu{
+        width: 100%;
+        border-right: none;
+    }
    }
 }

@@ -2,15 +2,17 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 08:23:52
- * @LastEditTime: 2023-06-12 14:15:01
+ * @LastEditTime: 2023-06-13 17:18:24
 -->
 <template>
     <el-container>
         <!-- 左侧导航栏 -->
         <el-aside width="200px">
             <div class="nav-menu">
+                <div class="logo row-center-center" :style="{width:themeConfig.isCollapse?'56px':'210px' }"><img src="../../assets/vue.svg" alt="logo" srcset=""><span class="text" v-if="!themeConfig.isCollapse">Vite+Vue3+ts</span></div>
+                
                 <el-scrollbar >
-                   <el-menu class="el-menu-vertical-demo" :collapse="themeConfig.isCollapse" :default-active="router.currentRoute.value.fullPath" active-text-color="#79bbff" :router="true" background-color="#545c64" text-color="#fff"  @open="handleOpen"
+                   <el-menu class="el-menu-vertical-demo" :collapse="themeConfig.isCollapse" :default-active="route.path" active-text-color="#ffd04b" background-color="#191a20" text-color="#fff"  @open="handleOpen"
                    @close="handleClose">
                     <NavMenu :menuList="menuList"/>
                    </el-menu>
@@ -26,10 +28,9 @@
                 <ToolBarRight/>
             </el-header>
             <!-- 内容主体 -->
-            <el-main>
-                <div></div>
-               <Main/>
-            </el-main>
+        <el-container class="lenghways-main">
+            <Main/>
+        </el-container>
         </el-container>
     </el-container>
 </template>
@@ -44,11 +45,11 @@ import {dynamic} from "../../route/modules/dynamicRoute"
 import Main from "../components/Main/Main.vue"
 import {GlobalStore} from "@/store"
 const router = useRouter();
+
 const menuList:object[]=dynamic;
 const globalStore =GlobalStore();
 const themeConfig =computed(()=>globalStore.themeConfig);
 const route = useRoute();
-const activeIndex=ref("0");
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log("handleOpen",key, keyPath)
 }

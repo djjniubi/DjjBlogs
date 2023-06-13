@@ -2,44 +2,20 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 11:09:55
- * @LastEditTime: 2023-06-12 14:02:18
+ * @LastEditTime: 2023-06-13 15:13:44
 -->
 <template>
   <div class="tabs-box">
     <div class="tabs-item">
-      <el-tabs v-model="activeName" type="card" class="demo-tabs" @tab-click="handleClick">
-        <el-tab-pane label="User" name="first">
+      <el-tabs v-model="activeName" type="card" class="demo-tabs" @tab-click="handleClick" @tab-remove="tabRemove">
+        <el-tab-pane v-for="item in tabsStore.tabsMenuList" :key="item.path" :label="item.title" :name="item.path" :closable="item.closable">
           <template #label>
             <el-icon class="tabs-icon" size="22">
-              <component :is="'HomeFilled'"></component>
+              <component :is="item.icon"></component>
             </el-icon>
-            User
+           {{ item.title }}
           </template>
         </el-tab-pane>
-        <el-tab-pane label="Config" name="second">
-          <template #label>
-            <el-icon class="tabs-icon">
-              <component :is="'HomeFilled'"></component>
-            </el-icon>
-            Config
-          </template>
-        </el-tab-pane>
-        <el-tab-pane label="Role" name="third">
-          <template #label>
-            <el-icon class="tabs-icon">
-              <component :is="'HomeFilled'"></component>
-            </el-icon>
-            Role
-          </template></el-tab-pane
-        >
-        <el-tab-pane label="Task" name="fourth">
-          <template #label>
-            <el-icon class="tabs-icon">
-              <component :is="'HomeFilled'"></component>
-            </el-icon>
-            Task
-          </template></el-tab-pane
-        >
       </el-tabs>
       <el-dropdown>
         <el-button size="small" type="primary">
@@ -61,12 +37,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import type { TabsPaneContext } from "element-plus";
-const activeName = ref("first");
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event);
+import { ref,watch } from "vue";
+import type { TabsPaneContext,TabPaneName } from "element-plus";
+import {useRoute,useRouter} from "vue-router"
+import {userTabsStore} from "@/store/modules/tabs"
+const route=useRoute();
+const router =useRouter();
+const activeName = ref(route.fullPath);
+const tabsStore=userTabsStore();
+watch(()=>route.fullPath,()=>{
+  activeName.value=route.fullPath;
+  let {title,icon,menuOrder,isAffix} = route.meta
+  
+  const tabsParams={
+            title:title as string,
+            menuOrder:menuOrder as number,
+            icon:icon as string,
+            path:route.path as string,
+            name:route.name as string,
+            closable:!isAffix as boolean
+  }
+  tabsStore.addTabs(tabsParams)
+  
+},{ immediate: true })
+/**hand Click */
+const handleClick = (tab: TabsPaneContext) => {
+  console.log(tab);
+  router.push(tab.props.name as string)
 };
+
+/**tab Remove */
+const tabRemove=(tab:TabPaneName)=>{
+  if(tab===activeName.value){
+    tabsStore.removeTabs(tab)
+  }
+}
 </script>
 <style lang="scss" scoped>
 .tabs-box {

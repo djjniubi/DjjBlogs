@@ -2,26 +2,27 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-12 16:03:05
+ * @LastEditTime: 2023-06-13 16:41:19
 -->
 <template>
-    <template v-for="(item,index) in menuList" :key="item.path">
-        <el-sub-menu v-if="item.children?.length">
+    <template v-for="(item,index) in menuList" :key="item.path" style="background-color: transparent;">
+        <el-sub-menu v-if="item.children?.length" :index="item.path">
             <template #title>
                 <el-icon>
                     <component :is="item.meta.icon"></component>
                 </el-icon>
                 <span>{{item.meta.title}}</span>
               </template>
-              <el-menu-item :index="cItem.path" v-for="(cItem,cIndex) in item.children" :key="cItem.path">{{ cItem.title }}</el-menu-item>
+              <!-- <el-menu-item :index="cItem.path" v-for="(cItem,cIndex) in item.children" :key="cItem.path">{{ cItem.title }}</el-menu-item> -->
+            <NavMenu :menuList="item.children" />  
         </el-sub-menu>
         <el-menu-item  v-else :index="item.path" @click="clickMenu(item)">
             <el-icon>
-                    <component :is="item.meta.icon"></component>
+                    <component :is="item.meta?.icon"></component>
                 </el-icon>
             <template #title>
                 
-                <span>{{ item.meta.title}}</span>
+                <span>{{ item.meta?.title||item.title}}</span>
             </template>
         </el-menu-item>
     </template>
@@ -35,3 +36,12 @@ const clickMenu=(data:any)=>{
    router.push(data.path)
 }
 </script>
+
+<style lang="scss" scoped>
+:deep(.el-sub-menu){
+   
+}
+.el-menu-item{
+    background-color: transparent;
+}
+</style>

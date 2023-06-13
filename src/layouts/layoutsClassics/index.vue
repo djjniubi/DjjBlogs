@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 08:23:52
- * @LastEditTime: 2023-06-12 14:55:13
+ * @LastEditTime: 2023-06-13 17:24:54
 -->
 
 <!-- 经典布局 -->
@@ -22,7 +22,7 @@
       <el-aside width="360px">
         <div class="nav-menu">
           <el-scrollbar>
-            <el-menu class="el-menu-vertical-demo" :collapse="themeConfig.isCollapse" :default-active="router.currentRoute.value.fullPath" :router="true" @open="handleOpen" @close="handleClose">
+            <el-menu class="el-menu-vertical-demo" :collapse="themeConfig.isCollapse" :default-active="route.path"  @open="handleOpen" @close="handleClose">
               <NavMenu :menuList="menuList" />
             </el-menu>
           </el-scrollbar>
@@ -44,7 +44,7 @@ import { useRouter, useRoute } from "vue-router";
 import { dynamic } from "../../route/modules/dynamicRoute";
 import Main from "../components/Main/Main.vue";
 import { GlobalStore } from "@/store";
-const router = useRouter();
+const route = useRoute();
 const menuList: object[] = dynamic;
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);

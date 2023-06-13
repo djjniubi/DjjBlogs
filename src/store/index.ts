@@ -1,7 +1,14 @@
+/*
+ * @Description: 
+ * @Author: 邓建军
+ * @Date: 2023-06-12 08:23:52
+ * @LastEditTime: 2023-06-13 14:15:38
+ */
 import { defineStore ,createPinia} from "pinia";
 import { counterState } from "./interface/index";
 import {setStorage,getStorage,removeStorage} from "@/utils/index";
 import {THEME_COLORS} from "@/config";
+import piniaPluginPersistedstate  from "pinia-plugin-persistedstate";
 export const GlobalStore = defineStore({
     //id: 必须的 
     id:"GlobalState",
@@ -47,8 +54,12 @@ export const GlobalStore = defineStore({
             setStorage("themeConfig",themeConfig)
 			this.themeConfig = themeConfig;
 		}
+    },
+    persist:{
+        paths:["token","userInfo","themeConfig"]
     }
 })
 const pinia =createPinia()
+pinia.use(piniaPluginPersistedstate)
 export default pinia
 
