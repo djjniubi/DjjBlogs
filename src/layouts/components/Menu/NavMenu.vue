@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-13 16:41:19
+ * @LastEditTime: 2023-06-13 20:35:30
 -->
 <template>
     <template v-for="(item,index) in menuList" :key="item.path" style="background-color: transparent;">
@@ -43,5 +43,17 @@ const clickMenu=(data:any)=>{
 }
 .el-menu-item{
     background-color: transparent;
+    &.is-active{
+        background: #060708;
+        &::before {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					width: 4px;
+					content: "";
+					background: var(--el-color-primary);
+				}
+    }
 }
 </style>

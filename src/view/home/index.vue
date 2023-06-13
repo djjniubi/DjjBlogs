@@ -1,24 +1,23 @@
+<!--
+ * @Author: 前端菜鸟--邓建军
+ * @Date: 2023-06-13 19:50:52
+ * @FilePath: \DjjBlogs\src\view\home\index.vue
+ * @LastEditors: djj
+ * @LastEditTime: 2023-06-13 22:47:02
+-->
 <template>
-    <div class="home">
-        欢迎来到我的主页111888
-    </div>
+    <top-view></top-view>
+	<sales-view></sales-view>
+	<bottom-view></bottom-view>
+	<map-view></map-view>
 </template>
 <script lang="ts" setup name="WangEditor">
 import {ref} from "vue"
-const value =ref("小美")
-
+import TopView from "./component/TopView.vue";
+import SalesView from "./component/SalesView.vue";
+import BottomView from "./component/BottomView.vue";
+import MapView from "./component/MapView.vue";
 </script>
 <style lang="scss" scoped>
-.home {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-    //background-color: #fff;
-	.home-bg {
-		width: 70%;
-		margin-bottom: 20px;
-	}
-}
+
 </style>

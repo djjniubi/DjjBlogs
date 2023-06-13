@@ -2,14 +2,14 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 08:23:52
- * @LastEditTime: 2023-06-13 17:18:24
+ * @LastEditTime: 2023-06-13 20:20:01
 -->
 <template>
     <el-container>
         <!-- 左侧导航栏 -->
         <el-aside width="200px">
             <div class="nav-menu">
-                <div class="logo row-center-center" :style="{width:themeConfig.isCollapse?'56px':'210px' }"><img src="../../assets/vue.svg" alt="logo" srcset=""><span class="text" v-if="!themeConfig.isCollapse">Vite+Vue3+ts</span></div>
+                <div class="logo row-center-center" :style="{width:themeConfig.isCollapse?'56px':'210px' }"><img src="../../assets/vue.svg" alt="logo" srcset=""><span class="text" v-show="!themeConfig.isCollapse">Vite+Vue3+ts</span></div>
                 
                 <el-scrollbar >
                    <el-menu class="el-menu-vertical-demo" :collapse="themeConfig.isCollapse" :default-active="route.path" active-text-color="#ffd04b" background-color="#191a20" text-color="#fff"  @open="handleOpen"
