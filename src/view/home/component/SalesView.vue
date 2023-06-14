@@ -2,42 +2,85 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-14 08:40:15
- * @LastEditTime: 2023-06-14 15:53:02
+ * @LastEditTime: 2023-06-14 23:34:35
 -->
 <template>
-  <el-card class="box-card">
+  <div style="margin-bottom: 20px;">
+    <el-card class="box-card" :body-style="{padding:'0 20px 20px 20px'}">
     <template #header>
       <div class="card-header">
         <el-menu class="sales-view-menu" mode="horizontal" :default-active="'1'" @select="onMenu">
-          <el-menu-item index="1">Processing Center</el-menu-item>
-          <el-menu-item index="2">Processing Center</el-menu-item>
+          <el-menu-item index="1">销售额</el-menu-item>
+          <el-menu-item index="2">访问量</el-menu-item>
         </el-menu>
         <div class="header-right row-end-center">
           <el-radio-group v-model="radio1" class="view-radio-group">
-            <el-radio-button label="New York" />
-            <el-radio-button label="Washington" />
-            <el-radio-button label="Los Angeles" />
-            <el-radio-button label="Chicago" />
+            <el-radio-button label="今日" />
+            <el-radio-button label="本周" />
+            <el-radio-button label="本月" />
+            <el-radio-button label="今年" />
           </el-radio-group>
-          <el-date-picker v-model="value2" type="daterange" unlink-panels range-separator="To" start-placeholder="Start date" end-placeholder="End date" :shortcuts="shortcuts" :size="size" />
+          <el-date-picker v-model="value2" type="daterange" unlink-panels range-separator="到" start-placeholder="开始日期" end-placeholder="结束日期" :shortcuts="shortcuts" :size="size" />
         </div>
       </div>
     </template>
-    <div id="sales-dom" :style="{width:'70%',height:'500px'}"></div>
-    <div>
-       <div></div>
-       <div></div>
+    <div class="sales-view-chart-wrapper">
+      <div id="sales-dom" class="echart"></div>
+    <div class="sales-view-list">
+       <div class="sales-view-title">排行榜</div>
+       <div class="sales-view-wrapper">
+           <div class="list-item row-start-center" v-for="item in list" :key="item.no">
+           <div :class="['list-item-no','row-center-center',item.no<=3?'top-no':'']">{{ item.no }}</div>
+          <div>{{ item.name }}</div>
+        <div class="list-item-money">{{ item.money }}</div>
+       </div>
+       </div>
+       
+    </div>
     </div>
   </el-card>
+  </div>
+  
 </template>
 
 <script setup lang="ts">
 import { ref,onMounted } from "vue";
 import * as echarts from "echarts";
 import {EChartsOption} from "echarts"
-const radio1 = ref("New York");
+const radio1 = ref("今日");
 const size = ref<"default" | "large" | "small">("default");
 const value2 = ref("");
+const list=ref([
+  {
+    no:1,
+    name:"排行榜",
+    money:200
+  }, {
+    no:2,
+    name:"排行榜",
+    money:200
+  }, {
+    no:3,
+    name:"排行榜",
+    money:200
+  }, {
+    no:4,
+    name:"排行榜",
+    money:200
+  }, {
+    no:5,
+    name:"排行榜",
+    money:200
+  }, {
+    no:6,
+    name:"排行榜",
+    money:200
+  }, {
+    no:7,
+    name:"排行榜",
+    money:200
+  },
+])
 const shortcuts = [
   {
     text: "上周",
@@ -73,11 +116,21 @@ const onMenu = (index: string) => {
 /** 图表配置*/
 function setOption():EChartsOption{
  return {
+  title:{
+    text:"年度销售额",
+    textStyle:{
+      fontSize:12,
+      color:"#666"
+    },
+    top:20,
+    left:25
+  },
   tooltip:{trigger:'axis'},
   series:[{
     name: 'Direct',
     type:"bar",
     data:[410, 82, 200, 334, 390, 330, 220, 150, 82, 200, 134, 290],
+    barWidth:"35%",
     tooltip:{
       show:true
     }
@@ -85,7 +138,10 @@ function setOption():EChartsOption{
   xAxis:{
     data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
   },
-  yAxis:{}
+  yAxis:{},
+  grid:{
+    bottom:20
+  }
  }
 }
 onMounted(()=>{
@@ -121,4 +177,50 @@ onMounted(()=>{
     }
   }
 }
+.sales-view-chart-wrapper{
+  display: flex;
+  height: 270px;
+  .echart{
+    flex: 0 0 70%;
+    width: 70%;
+    height: 100%;
+  }
+  .sales-view-list{
+    flex: 1;
+    height: 100%;
+    .sales-view-title{
+      margin-top: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+    .sales-view-wrapper{
+      margin-top: 15px;
+      .list-item{
+      
+      padding: 6px 20px 6px 0;
+      .list-item-no{
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      &.top-no{
+      background-color:var(--el-text-color-primary);
+      border-radius: 50%;
+      color:var(--el-bg-color);
+      font-weight: 500;
+    }
+
+    }
+    .list-item-money{
+      flex: 1;
+      text-align: right;
+    }
+    }
+    }
+    
+
+   
+    
+}
+}
+
 </style>
