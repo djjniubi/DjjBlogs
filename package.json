@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@types/echarts": "^4.9.18",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.8",
     "echarts": "^5.4.2",
     "element-plus": "^2.3.6",
     "mitt": "^3.0.0",

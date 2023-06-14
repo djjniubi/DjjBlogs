@@ -11,6 +11,8 @@ import * as Icons from '@element-plus/icons-vue';
 import "@/assets/icon/iconfont.scss";
 //element (内置的暗黑模式)
 import 'element-plus/theme-chalk/dark/css-vars.css'
+//国际化
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 //router
 import router from './route'
 import pinia from "@/store"
@@ -20,4 +22,4 @@ const app=createApp(App)
 Object.keys(Icons).forEach(key => {
 	app.component(key, Icons[key as keyof typeof Icons]);
 });
-app.use(router).use(ElementPlus).use(pinia).mount('#app')
+app.use(router).use(ElementPlus,{locale:zhCn}).use(pinia).mount('#app')
