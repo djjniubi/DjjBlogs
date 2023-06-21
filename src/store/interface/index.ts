@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-13 11:32:10
+ * @LastEditTime: 2023-06-21 10:05:24
  */
 /** themeConfigType */
 export interface ThemeConfigType{
@@ -33,4 +33,12 @@ export interface TabsMenuProps{
     name: string;
     menuOrder:number;
     closable:boolean
+}
+
+/**AuthState */
+export interface AuthState{
+    authButtonList:{
+        [k:string]:string[]
+    },
+    authMenuList:Menu.MenuOptions[]
 }

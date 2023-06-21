@@ -923,6 +923,11 @@ magic-string@^0.30.0:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.13"
 
+mapvgl@^1.0.0-beta.180:
+  version "1.0.0-beta.180"
+  resolved "https://repo.huaweicloud.com/repository/npm/mapvgl/-/mapvgl-1.0.0-beta.180.tgz#5ceaab9984a8d2901e65db15acb3176094dd2f89"
+  integrity sha512-UOyW+mtQnBPU3fDqV9aOp2VE4Pv/EpqPnDoFCoFdbw+wtn7ZjeyTXF1tI49R9UfihVqWtmF4I7Gw/gTHmuoVNw==
+
 memoize-one@^6.0.0:
   version "6.0.0"
   resolved "https://repo.huaweicloud.com/repository/npm/memoize-one/-/memoize-one-6.0.0.tgz#b2591b871ed82948aee4727dc6abceeeac8c1045"
