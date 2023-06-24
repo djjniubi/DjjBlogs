@@ -1,11 +1,18 @@
+
 /*
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-21 08:12:34
+ * @LastEditTime: 2023-06-24 22:11:36
  */
+import router from "../index"
 import {RouteRecordRaw} from "vue-router"
 import layouts from "@/layouts/index.vue"
+
+async function name() {
+    console.log("router",await router); 
+}
+name()
 type Config ={
     title:String,
     icon:String,
@@ -34,10 +41,16 @@ const  newRuoteAll=viewAllArr.map(([pagePath,config]:any)=>{
     const compPath=pagePath.replace("page.ts","index.vue")
     let masterObj:any={path,name,component:layouts,meta: config,children:[]}
     let sonObj={path,name,component: viewAll[compPath],meta: config,children:config.children?config.children:[]}
-    if(config.children){
-        // console.log("config66",config);
+    if(config.isFull){
+        console.log("config66",config);
+        // router.addRoute(masterObj)
+    }else{
+        masterObj.children.push(sonObj)
+        // router.addRoute("layout",masterObj)
     }
     masterObj.children.push(sonObj)
+//    console.log("router",router);
+   
     return masterObj
 })
 
@@ -66,23 +79,6 @@ export const dynamic=newNav.sort(fun)
 //路由格式
 export const dynamicRouter:Array<RouteRecordRaw>=newRuoteAll.sort(fun)
 console.log("newRuoteAll",newRuoteAll);
-// export const dynamic=[{
-//     name:"首页",
-//     path:"/home/index",
-//     meta:{
-//         icon:"HomeFilled"
-//     },
-//     component:"/home/index",
-//     children:[]
-// },{
-//     name:"文章列表",
-//     path:"/articleList/index",
-//     meta:{
-//         icon:"Tickets"
-//     },
-//     component:"/articleList/index",
-//     children:[]
-// }]
 
 
 

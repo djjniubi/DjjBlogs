@@ -1,3 +1,10 @@
+/*
+ * @Author: 前端菜鸟--邓建军
+ * @Date: 2023-06-23 14:20:18
+ * @FilePath: \DjjBlogs\src\route\modules\staticRoute.ts
+ * @LastEditors: djj
+ * @LastEditTime: 2023-06-24 21:54:03
+ */
 
 import {RouteRecordRaw} from "vue-router"
 /**
@@ -18,6 +25,18 @@ export const staticRouter:Array<RouteRecordRaw>=[
        path:"/login",
         name:"login",
         component:()=>import("@/view/login/index.vue")
+    },
+    {
+        path:"/layout",
+        name:"layout",
+        component:()=>{import("@/layouts/index.vue")},
+        redirect:"/home/index",
+        children:[]
+    },
+    {
+        path:"/largeDataScreen/index",
+        name:"largeDataScreen",
+        component:()=>import("@/view/largeDataScreen/index.vue")
     },
     {
         path:"/404",
