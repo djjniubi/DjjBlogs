@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-21 10:21:05
+ * @LastEditTime: 2023-06-25 13:39:12
  */
 
 export function getStorage(key:any){
@@ -60,5 +60,6 @@ export const formatDate=(cellValue:any,format="")=>{
 
 export const getFlatMapList=(menuList:Menu.MenuOptions[]):Menu.MenuOptions[]=>{
     let list:Menu.MenuOptions[] =JSON.parse(JSON.stringify(menuList));
-    return list.flatMap((item)=>[item,...(item.children?getFlatMapList(item.children):[])])
+    return list.flatMap((item)=>[item,...(item.children?[]:[])])
 }
+

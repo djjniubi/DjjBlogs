@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-23 14:20:18
  * @FilePath: \DjjBlogs\src\route\modules\staticRoute.ts
- * @LastEditors: djj
- * @LastEditTime: 2023-06-24 21:54:03
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-06-25 13:58:33
  */
 
 import {RouteRecordRaw} from "vue-router"
@@ -16,7 +16,7 @@ import {RouteRecordRaw} from "vue-router"
  */
 
 //静态路由
-export const staticRouter:Array<RouteRecordRaw>=[
+export const staticRoute:Array<RouteRecordRaw>=[
     {
         path:"/",
         redirect:"/home/index"
@@ -37,25 +37,25 @@ export const staticRouter:Array<RouteRecordRaw>=[
         path:"/largeDataScreen/index",
         name:"largeDataScreen",
         component:()=>import("@/view/largeDataScreen/index.vue")
-    },
+    }
+    
+]
+
+/**
+ * errorRouter (错误页面路由)
+ */
+
+ export const errorRouter =[
     {
         path:"/404",
         name:"404",
-        children:[
-            {
-                path:"/404",
-                name:"home",
-                component:()=> import("@/components/ErrorMessage/404.vue"),
-                meta:{
-                    title:"404页面"
-                }
-            }
-        ]
+        component:()=> import("@/components/ErrorMessage/404.vue"),
+        meta: {
+            title: "404页面"
+          }
     },
     {
         path:'/:pathMatch(.*)',
         redirect:"/404"
     }
-]
-
-export default staticRouter
+ ]

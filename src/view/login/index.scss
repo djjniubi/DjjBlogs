@@ -46,10 +46,10 @@
   }
 }
 .login.back{ 
-    transform:rotateY(-180deg);
+    transform:rotateY(-180deg) ;
 }
 .turn-out-front{
-    transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) ;
 }
 .turn-out-back{
     transform: rotateY(0deg) !important;

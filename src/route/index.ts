@@ -1,11 +1,11 @@
 import { createRouter,createWebHashHistory,RouteRecordRaw } from "vue-router";
 import {dynamic,dynamicRouter} from "./modules/dynamicRoute";
-import staticRoute from "@/route/modules/staticRoute"
+import {staticRoute,errorRouter} from "@/route/modules/staticRoute"
 import {getStorage,setStorage} from "@/utils/index"
 import {ElMessage} from "element-plus"
 const router = createRouter({
     history:createWebHashHistory(),    //路由模式
-    routes:[...dynamicRouter,...staticRoute],                 //路由表
+    routes:[...dynamicRouter,...staticRoute,...errorRouter],                 //路由表
     scrollBehavior:()=>({top:0})       //滚动位子
 })
 

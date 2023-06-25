@@ -3,16 +3,12 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-24 22:11:36
+ * @LastEditTime: 2023-06-25 14:59:45
  */
 import router from "../index"
 import {RouteRecordRaw} from "vue-router"
 import layouts from "@/layouts/index.vue"
 
-async function name() {
-    console.log("router",await router); 
-}
-name()
 type Config ={
     title:String,
     icon:String,
@@ -41,16 +37,14 @@ const  newRuoteAll=viewAllArr.map(([pagePath,config]:any)=>{
     const compPath=pagePath.replace("page.ts","index.vue")
     let masterObj:any={path,name,component:layouts,meta: config,children:[]}
     let sonObj={path,name,component: viewAll[compPath],meta: config,children:config.children?config.children:[]}
-    if(config.isFull){
-        console.log("config66",config);
-        // router.addRoute(masterObj)
+    if(config?.meta?.isFull){
+        masterObj.component= viewAll[compPath]
+        masterObj.meta=config.meta
+        console.log("config66",config,masterObj);
     }else{
         masterObj.children.push(sonObj)
-        // router.addRoute("layout",masterObj)
-    }
-    masterObj.children.push(sonObj)
-//    console.log("router",router);
-   
+    }   
+    console.log("masterObj",masterObj);
     return masterObj
 })
 
@@ -64,7 +58,7 @@ const  newNav=viewAllArr.map(([pagePath,config]:any)=>{
         path,
         name,
         component: viewAll[compPath],  
-        meta: config,
+        meta:(config?.meta?.isFull?config.meta:config),
         children:config.children?config.children:[]
     }
 })

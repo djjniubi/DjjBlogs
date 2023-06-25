@@ -16,18 +16,18 @@
         :size="formSize"
         status-icon
       >
-        <el-form-item label-width="80px" label="用户名" prop="username">
-          <el-input v-model="ruleForm.username" />
+        <el-form-item label-width="80px" label="用户名" prop="username" >
+          <el-input v-model="ruleForm.username"  />
         </el-form-item>
-        <el-form-item  label-width="80px" label="密码" prop="password">
-          <el-input type="password" v-model="ruleForm.password" />
+        <el-form-item  label-width="80px" label="密码" prop="password" >
+          <el-input type="password" v-model="ruleForm.password"  />
         </el-form-item>
-        <div style="display:flex ;align-items: center;">
+        <!-- <div style="display:flex ;align-items: center;">
           <el-form-item class="code-item" label-width="80px" label="验证码" prop="code">
             <el-input v-model="ruleForm.code" />
         </el-form-item>
           <div  v-html="svg" @click="codeSvg"></div>
-        </div>
+        </div> -->
       </el-form>
       <el-button class="submit-form" size="large" type="primary" @click="submitForm(ruleFormRef)">
         登录
@@ -37,7 +37,7 @@
           <p class="p2" @click="registration">去注册</p>
       </div>
     </div>
-    <div class="login back" :class="[lognType?'turn-out-front':'turn-out-back']">
+    <div class="login back" >
       <!-- 注册 -->
       <h3 >注册</h3>
       <el-form
@@ -138,28 +138,42 @@ const submitForm = async (formEl: FormInstance | undefined) => {
    
     if (valid) {
       console.log("ruleForm",ruleForm);
-
-      userLogin(ruleForm).then((res:any)=>{
-        console.log("userLogin",res);
-          if(res["code"]===200){
+       if(ruleForm.username!="admin") ElMessage({
+            message:"用户名错误",
+                type:"error"
+          })
+          if(ruleForm.password!="123456") ElMessage({
+            message:"密码错误",
+                type:"error"
+          })
+          if(ruleForm.username==="admin"&&ruleForm.password==="123456"){
             ElMessage({
             message:"登入成功",
                 type:"success"
           })
-          globalStore.setToken(res["token"])
-          globalStore.setUserInfo(res["userinfo"])
-          router.push("/")
-          }else if(res["code"]===404){
-            ElMessage({
-            message:res.message,
-                type:"error"
-          })
-            res.message.includes("验证码")?ruleForm.code="":""
+          globalStore.setToken("asd123456")
           }
-        }).catch((error)=>{
-          console.log("错误",error);
+      // userLogin(ruleForm).then((res:any)=>{
+      //   console.log("userLogin",res);
+      //     if(res["code"]===200){
+      //       ElMessage({
+      //       message:"登入成功",
+      //           type:"success"
+      //     })
+      //     globalStore.setToken(res["token"])
+      //     globalStore.setUserInfo(res["userinfo"])
+      //     router.push("/")
+      //     }else if(res["code"]===404){
+      //       ElMessage({
+      //       message:res.message,
+      //           type:"error"
+      //     })
+      //       res.message.includes("验证码")?ruleForm.code="":""
+      //     }
+      //   }).catch((error)=>{
+      //     console.log("错误",error);
           
-        })
+      //   })
        
     } else {
       console.log("error submit!", fields);
@@ -202,7 +216,7 @@ const codeSvg = () => {
     
   });
 };
-codeSvg();
+// codeSvg();
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";
