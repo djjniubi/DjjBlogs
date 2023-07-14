@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-23 14:20:18
  * @FilePath: \DjjBlogs\src\route\modules\staticRoute.ts
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-06-25 13:58:33
+ * @LastEditors: djj
+ * @LastEditTime: 2023-07-14 18:33:09
  */
 
 import {RouteRecordRaw} from "vue-router"
@@ -34,7 +34,7 @@ export const staticRoute:Array<RouteRecordRaw>=[
         children:[]
     },
     {
-        path:"/largeDataScreen/index",
+        path:"/largeDataScreen",
         name:"largeDataScreen",
         component:()=>import("@/view/largeDataScreen/index.vue")
     }
@@ -56,6 +56,6 @@ export const staticRoute:Array<RouteRecordRaw>=[
     },
     {
         path:'/:pathMatch(.*)',
-        redirect:"/404"
+        component: () => import("@/components/ErrorMessage/404.vue")
     }
  ]

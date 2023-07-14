@@ -32,37 +32,7 @@
       <el-button class="submit-form" size="large" type="primary" @click="submitForm(ruleFormRef)">
         登录
       </el-button>
-      <div class="sign-up">
-          <p class="p1">还未有账号？</p>
-          <p class="p2" @click="registration">去注册</p>
-      </div>
-    </div>
-    <div class="login back" >
-      <!-- 注册 -->
-      <h3 >注册</h3>
-      <el-form
-          ref="ruleFormRef"
-          :model="ruleForm"
-          :rules="rulesSignUp"
-          label-width="120px"
-          class="demo-ruleForm login_form"
-          :size="formSize"
-          status-icon
-        >
-          <el-form-item label-width="80px" label="用户名" prop="username">
-            <el-input v-model="ruleForm.username" />
-          </el-form-item>
-          <el-form-item  label-width="80px" label="密码" prop="password">
-            <el-input type="password" v-model="ruleForm.password" />
-          </el-form-item>
-        </el-form>
-        <el-button  class="submit-form" size="large" type="primary" @click="submitSignUp(ruleFormRef)">
-          注册
-        </el-button>
-        <div class="sign-up">
-          <p class="p1">已有账号？</p>
-          <p class="p2" @click="registration">去登录</p>
-      </div>
+
     </div>
   </div>
   
@@ -74,7 +44,8 @@ import { codeCaptcha,userLogin,register } from "@/api/login";
 import {setStorage} from "@/utils/index"
 import { GlobalStore}from "@/store"
 import router from "@/route";
-import {ElMessage} from "element-plus"
+import {ElMessage} from "element-plus";
+import {initDynamicRouter} from "@/route/modules/dynamicRoute"
 const formSize = ref("default");
 const globalStore=GlobalStore()
 
@@ -151,30 +122,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             message:"登入成功",
                 type:"success"
           })
+         
           globalStore.setToken("asd123456")
+          initDynamicRouter()
           }
-      // userLogin(ruleForm).then((res:any)=>{
-      //   console.log("userLogin",res);
-      //     if(res["code"]===200){
-      //       ElMessage({
-      //       message:"登入成功",
-      //           type:"success"
-      //     })
-      //     globalStore.setToken(res["token"])
-      //     globalStore.setUserInfo(res["userinfo"])
-      //     router.push("/")
-      //     }else if(res["code"]===404){
-      //       ElMessage({
-      //       message:res.message,
-      //           type:"error"
-      //     })
-      //       res.message.includes("验证码")?ruleForm.code="":""
-      //     }
-      //   }).catch((error)=>{
-      //     console.log("错误",error);
-          
-      //   })
-       
     } else {
       console.log("error submit!", fields);
     }
@@ -185,29 +136,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
-//去注册
-const registration=()=>{
-  lognType.value=!lognType.value
-}
-//注册
-const submitSignUp= async (formEl: FormInstance | undefined)=>{
-  if (!formEl) return;
-  await formEl.validate((valid, fields) => {
-   
-    if (valid) {
-      register(ruleForm).then((res)=>{
-          console.log("register",res);
-          ElMessage({
-            message:"注册成功",
-                type:"success"
-          })
-      })
-       
-    } else {
-      console.log("error submit!", fields);
-    }
-  });
-}
+
+
 const codeSvg = () => {
   codeCaptcha().then((res:any) => {
     code.value = res["text"];

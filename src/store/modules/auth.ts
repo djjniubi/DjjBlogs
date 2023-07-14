@@ -2,12 +2,13 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-21 09:43:48
- * @LastEditTime: 2023-06-25 13:25:44
+ * @LastEditTime: 2023-07-14 18:10:24
  */
 import {defineStore} from "pinia";
 import{AuthState} from "../interface/index";
 import {getAuthMenuListApi} from "@/hooks/pageRoute";
-import {getFlatMapList} from "@/utils/index"
+import {getFlatMapList,getShowMenuList} from "@/utils/index";
+import routerData from "@/assets/json/authMenuList.json";
 export const userAuthStore=defineStore('minUserAuthStore',{
     state:():AuthState=>{
         return{
@@ -23,11 +24,12 @@ export const userAuthStore=defineStore('minUserAuthStore',{
         //路由菜单列表
         authMenuListGet:state=>getFlatMapList(state.authMenuList),
         //扁平化菜单
-        flatMenuListGet:state=>getFlatMapList(state.authMenuList)
+        flatMenuListGet:state=>getShowMenuList(state.authMenuList)
     },
     actions:{
+        //获取路由数据
         getAuthMenuList(){
-            this.authMenuList=getAuthMenuListApi()
+            this.authMenuList=routerData.data
         }
     }
 })

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-06-25 13:39:12
+ * @LastEditTime: 2023-07-14 01:08:39
  */
 
 export function getStorage(key:any){
@@ -60,6 +60,17 @@ export const formatDate=(cellValue:any,format="")=>{
 
 export const getFlatMapList=(menuList:Menu.MenuOptions[]):Menu.MenuOptions[]=>{
     let list:Menu.MenuOptions[] =JSON.parse(JSON.stringify(menuList));
-    return list.flatMap((item)=>[item,...(item.children?[]:[])])
+    return list.flatMap((item)=>[item,...(item.children?getFlatMapList(item.children):[])])
 }
+/**
+ * @descriptio 使用递归过滤出需要渲染在左侧菜单的列表
+ * @param {Array} menuList 菜单列表
+ */
 
+export const getShowMenuList=(menuList:Menu.MenuOptions[])=>{
+    let list:Menu.MenuOptions[] =JSON.parse(JSON.stringify(menuList));
+    return list.filter(item=>{
+        item.children?.length&&(item.children=getShowMenuList(item.children));
+        return !item.meta.isHide
+    })
+}

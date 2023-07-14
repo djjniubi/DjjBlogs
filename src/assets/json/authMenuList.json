@@ -2,8 +2,55 @@
     "data":[
         {
             "path":"/home/index",
-            "name":"home"
-
+            "name":"home",
+            "component":"/home/index",
+            "meta":{
+                "icon": "HomeFilled",
+                "title": "首页",
+                "menuOrder":0,
+                "isAffix": true,
+                "isHide": false,
+				"isFull": false
+            }
+        },{
+            "path":"/largeDataScreen",
+            "name":"largeDataScreen",
+            "component":"/largeDataScreen/index",
+            "meta":{
+                "icon": "HomeFilled",
+                "title": "数据大屏",
+                "menuOrder":1,
+                "isAffix": true,
+                "isHide": false,
+				"isFull": true
+            }
+        },{
+            "path":"/component",
+            "name":"component",
+            "component":"/component/index",
+            "meta":{
+                "icon": "HomeFilled",
+                "title": "常用组件",
+                "menuOrder":1,
+                "isAffix": true,
+                "isHide": false,
+				"isFull": false
+            },
+            "children":[
+                {
+                    "path":"/component/uploadFile",
+                    "name":"uploadFile",
+                    "component":"/component/uploadFile/index",
+                    "meta":{
+                        "icon": "HomeFilled",
+                        "title": "文件上传",
+                        "menuOrder":1,
+                        "isAffix": true,
+                        "isHide": false,
+                        "isFull": false
+                    } 
+                }
+            ]
         }
     ]
 }   

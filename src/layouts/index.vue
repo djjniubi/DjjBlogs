@@ -3,14 +3,15 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-02-24 21:05:07
  * @FilePath: \DjjBlogs\src\layouts\index.vue
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-06-12 14:20:04
+ * @LastEditors: djj
+ * @LastEditTime: 2023-07-14 02:12:21
 -->
-<component :is="layoutsCompont[globalStore.themeConfig.layouts]"></component>
+<component :is="layoutsCompont[layouts]"></component>
 <ThemeDrawer/>
 </template>
 
 <script setup lang="ts">
+import {computed} from "vue";
 import ThemeDrawer  from "./components/ThemeDrawer/index.vue"
 import layoutsClassics from "./layoutsClassics/index.vue";
 import layoutsLengthways from "./layoutsLenghways/index.vue";
@@ -23,6 +24,7 @@ const layoutsCompont:{[key:string]:any}={
     crosswise:layoutsClassics,
     subfield:layoutsSubfield
 }
+const layouts=computed(()=>globalStore.themeConfig.layouts)
 </script>
 
 <style lang="scss" scoped>
