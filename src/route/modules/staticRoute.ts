@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-23 14:20:18
  * @FilePath: \DjjBlogs\src\route\modules\staticRoute.ts
- * @LastEditors: djj
- * @LastEditTime: 2023-07-14 18:33:09
+ * @LastEditors: Andy
+ * @LastEditTime: 2023-07-14 22:23:31
  */
 
 import {RouteRecordRaw} from "vue-router"
@@ -29,7 +29,7 @@ export const staticRoute:Array<RouteRecordRaw>=[
     {
         path:"/layout",
         name:"layout",
-        component:()=>{import("@/layouts/index.vue")},
+        component:()=>import("@/layouts/index.vue"),
         redirect:"/home/index",
         children:[]
     },

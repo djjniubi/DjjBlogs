@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 14:13:30
- * @LastEditTime: 2023-06-13 09:05:56
+ * @LastEditTime: 2023-07-14 21:59:01
 -->
 <template>
   <!-- 分栏布局 -->
@@ -42,14 +42,17 @@ import NavMenu from "../components/Menu/NavMenu.vue";
 import ToolBarLeft from "../components/Header/ToolBarLeft.vue";
 import ToolBarRight from "../components/Header/ToolBarRight.vue";
 import Main from "../components/Main/Main.vue";
-import {dynamic} from "@/route/modules/dynamicRoute";
+
 import { GlobalStore } from "@/store";
+import { userAuthStore } from "@/store/modules/auth";
+
+const minuserAuthStore = userAuthStore();
+const menuList: any[] = minuserAuthStore.flatMenuListGet;
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
 const route=useRouter()
 console.log("route",route);
 
-const menuList= dynamic;
 const subMenuList=ref<any>([])
 const fatherMenu =(data: any)=>{
     if(data.children) {

@@ -20,7 +20,7 @@
                 "icon": "HomeFilled",
                 "title": "数据大屏",
                 "menuOrder":1,
-                "isAffix": true,
+                "isAffix": false,
                 "isHide": false,
 				"isFull": true
             }
@@ -32,7 +32,7 @@
                 "icon": "HomeFilled",
                 "title": "常用组件",
                 "menuOrder":1,
-                "isAffix": true,
+                "isAffix": false,
                 "isHide": false,
 				"isFull": false
             },
@@ -45,7 +45,7 @@
                         "icon": "HomeFilled",
                         "title": "文件上传",
                         "menuOrder":1,
-                        "isAffix": true,
+                        "isAffix": false,
                         "isHide": false,
                         "isFull": false
                     } 

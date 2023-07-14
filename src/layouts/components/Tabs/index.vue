@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-12 11:09:55
- * @LastEditTime: 2023-06-13 15:13:44
+ * @LastEditTime: 2023-07-14 22:38:54
 -->
 <template>
   <div class="tabs-box">
@@ -47,7 +47,8 @@ const activeName = ref(route.fullPath);
 const tabsStore=userTabsStore();
 watch(()=>route.fullPath,()=>{
   activeName.value=route.fullPath;
-  let {title,icon,menuOrder,isAffix} = route.meta
+  let {title,icon,menuOrder,isAffix,isFull} = route.meta
+  console.log("route.meta",route.meta);
   
   const tabsParams={
             title:title as string,
@@ -57,7 +58,7 @@ watch(()=>route.fullPath,()=>{
             name:route.name as string,
             closable:!isAffix as boolean
   }
-  tabsStore.addTabs(tabsParams)
+  isFull?null:tabsStore.addTabs(tabsParams)
   
 },{ immediate: true })
 /**hand Click */
