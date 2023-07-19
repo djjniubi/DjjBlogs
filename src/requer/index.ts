@@ -1,3 +1,9 @@
+/*
+ * @Description: 
+ * @Author: 邓建军
+ * @Date: 2023-03-27 08:10:53
+ * @LastEditTime: 2023-07-18 16:38:33
+ */
 import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
 import {setStorage,getStorage,removeStorage} from "@/utils/index"
@@ -5,7 +11,9 @@ import {ResultEnum} from "@/enums/httpEnums"
 import {errorType} from "@/requer/errorType"
 import {GlobalStore} from "@/store"
 import router from "@/route"
-const globalStore=GlobalStore()
+const globalStore=GlobalStore();
+console.log("import.meta.env.VITE_API_URL ",import.meta.env.VITE_API_URL);
+
 const config ={
     baseURL:import.meta.env.VITE_API_URL as string,
     timeout:ResultEnum.TIMEOUT as number,

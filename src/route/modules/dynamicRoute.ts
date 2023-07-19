@@ -3,7 +3,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-07-14 18:38:21
+ * @LastEditTime: 2023-07-17 09:53:51
  */
 import router from "@/route/index"
 import {RouteRecordRaw} from "vue-router"
@@ -21,7 +21,7 @@ export const initDynamicRouter= async ()=>{
            await authStore.getAuthMenuList();
         authStore.authMenuListGet.forEach(item=>{
             if(item.component && typeof item.component==='string'){
-                item.component=viewModules["/src/view"+item.component+".vue"];
+                item.component=viewModules[`/src/view${item.component}.vue`];
                 console.log("viewModules",item.component);
                 
             }

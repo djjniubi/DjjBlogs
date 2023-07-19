@@ -3,8 +3,11 @@
     
   </div>
   <!-- 登录 -->
-  <div class="form-box">
-    <div class="login front" :class="[lognType?'':'turn-out-front']">
+  <div class="form-box row-around-center">
+    <div class="login-left">
+      <img  class="login-left-img" src="../../assets/login.svg" alt="">
+    </div>
+    <div class="login front">
       <h3 >登录</h3>
   
       <el-form
@@ -16,23 +19,22 @@
         :size="formSize"
         status-icon
       >
-        <el-form-item label-width="80px" label="用户名" prop="username" >
-          <el-input v-model="ruleForm.username"  />
+        <el-form-item label-width="80px" label="用户名" prop="userName"  >
+          <el-input v-model="ruleForm.userName" placeholder="admin"  />
         </el-form-item>
         <el-form-item  label-width="80px" label="密码" prop="password" >
-          <el-input type="password" v-model="ruleForm.password"  />
+          <el-input type="password" v-model="ruleForm.password" placeholder="123456"  />
         </el-form-item>
-        <!-- <div style="display:flex ;align-items: center;">
-          <el-form-item class="code-item" label-width="80px" label="验证码" prop="code">
-            <el-input v-model="ruleForm.code" />
-        </el-form-item>
-          <div  v-html="svg" @click="codeSvg"></div>
-        </div> -->
       </el-form>
-      <el-button class="submit-form" size="large" type="primary" @click="submitForm(ruleFormRef)">
+      <div class="row-start-center" style="width:100%;">
+        <el-button class="submit-form" icon="CircleClose" size="large" :round="true"  @click="resetForm(ruleFormRef)">
+       重置
+      </el-button>
+      <el-button class="submit-form" icon="UserFilled" size="large" :round="true" type="primary" @click="submitForm(ruleFormRef)">
         登录
       </el-button>
-
+      </div>
+      
     </div>
   </div>
   
@@ -43,33 +45,23 @@ import type { FormInstance, FormRules } from "element-plus";
 import { codeCaptcha,userLogin,register } from "@/api/login";
 import {setStorage} from "@/utils/index"
 import { GlobalStore}from "@/store"
-import router from "@/route";
+import {useRouter} from "vue-router"
 import {ElMessage} from "element-plus";
-import {initDynamicRouter} from "@/route/modules/dynamicRoute"
+import {initDynamicRouter} from "@/route/modules/dynamicRoute";
 const formSize = ref("default");
 const globalStore=GlobalStore()
 
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
-  username: "",
+  userName: "",
   password: "",
-  code: "",
 });
 const lognType=ref(true)
 const svg=ref()
 const code = ref();
-const validatePass =(rule:any,value:any,callback:any):any=>{
-  console.log("code",code);
-  
-    if(value!==code.value){
-      callback("验证码不正确")
-    }else{
-      callback()
-    }
-
-}
+const router=useRouter()
 const rulesLogin = reactive<FormRules>({
-  username: [
+  userName: [
     { required: true, message: "请输入用户名", trigger: "blur" },
     { message: "Length should be 3 to 5", trigger: "blur" },
   ],
@@ -105,27 +97,21 @@ const rulesSignUp=reactive<FormRules>({
 });
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+  await formEl.validate(async(valid, fields) => {
    
     if (valid) {
-      console.log("ruleForm",ruleForm);
-       if(ruleForm.username!="admin") ElMessage({
-            message:"用户名错误",
-                type:"error"
-          })
-          if(ruleForm.password!="123456") ElMessage({
-            message:"密码错误",
-                type:"error"
-          })
-          if(ruleForm.username==="admin"&&ruleForm.password==="123456"){
-            ElMessage({
-            message:"登入成功",
-                type:"success"
-          })
-         
-          globalStore.setToken("asd123456")
-          initDynamicRouter()
-          }
+         const {data}=await userLogin(ruleForm);
+                      await initDynamicRouter()
+         const {avatar,creationTime,email,id,phone,updateTime,userName}=data;
+         globalStore.setToken(data.token);
+         globalStore.setUserInfo({avatar,creationTime,email,id,phone,updateTime,userName})
+         ElMessage.success({
+          message:"欢迎登录",
+          type:"success"
+         })
+         setTimeout(()=>{
+          router.push("/home/index")
+         },800)
     } else {
       console.log("error submit!", fields);
     }
@@ -137,16 +123,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields();
 };
 
-
-const codeSvg = () => {
-  codeCaptcha().then((res:any) => {
-    code.value = res["text"];
-    svg.value=res["data"];
-    // console.log("res",res);
-    
-  });
-};
-// codeSvg();
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";

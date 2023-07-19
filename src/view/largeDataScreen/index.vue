@@ -3,12 +3,12 @@
  * @Date: 2023-06-23 14:25:34
  * @FilePath: \DjjBlogs\src\view\largeDataScreen\index.vue
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-06-29 13:40:39
+ * @LastEditTime: 2023-07-11 14:00:09
 -->
 <template>
     <AdaptiveContainer>
     <div>1111</div>
-    <img src="../../assets/vue.svg" alt="" srcset="">
+    <img src="../../assets/cehngshi.svg" alt="" srcset="">
     <!-- <img src="../../assets/logo.svg" alt="" srcset=""> -->
     <!-- <svg viewBox="-10 -10 220 100" xmlns="http://www.w3.org/2000/svg">
         <rect width="50" height="50" style="fill:none;stroke: blue; stroke-width: 1">

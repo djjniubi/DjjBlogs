@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-06-13 14:15:38
  */
 import { defineStore ,createPinia} from "pinia";
-import { counterState } from "./interface/index";
+import { counterState,UserInfoData } from "./interface/index";
 import {setStorage,getStorage,removeStorage} from "@/utils/index";
 import {THEME_COLORS} from "@/config";
 import piniaPluginPersistedstate  from "pinia-plugin-persistedstate";
@@ -40,7 +40,7 @@ export const GlobalStore = defineStore({
             
         },
         // setUserInfo
-        setUserInfo(userInfo: any) {
+        setUserInfo(userInfo: UserInfoData) {
             this.userInfo = userInfo;
             setStorage("userInfo",userInfo)
         },
