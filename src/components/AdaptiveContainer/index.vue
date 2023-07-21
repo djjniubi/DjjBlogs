@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-23 17:50:02
  * @FilePath: \DjjBlogs\src\components\AdaptiveContainer\index.vue
- * @LastEditors: djj
- * @LastEditTime: 2023-06-24 23:32:09
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-21 08:20:19
 -->
 <template>
     <div id="container" ref="container" :style="{}">
@@ -63,7 +63,7 @@ const updateScale=()=>{
     const  realHeight=height.value||originalHeight.value;
     const widthScale=currentWidth/realWidth;
     const heightScale=currentHeight/realHeight;
-    console.log("widthScale",currentWidth,realWidth,widthScale);
+    console.log("widthScale",currentHeight,heightScale);
     
     dom.style.transform=`scale(${widthScale.toFixed(2)},${heightScale.toFixed(2)})`
 }
