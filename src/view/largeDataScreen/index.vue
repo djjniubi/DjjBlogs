@@ -2,11 +2,11 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-23 14:25:34
  * @FilePath: \DjjBlogs\src\view\largeDataScreen\index.vue
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-07-21 10:17:05
+ * @LastEditors: djj
+ * @LastEditTime: 2023-07-22 00:27:23
 -->
 <template>
-    <AdaptiveContainer>
+    <AdaptiveContainer :options="{width,height}" :style="{width:'1920px',height:'1080px'}">
       <div style="position: fixed;height: 100%;" ref="webgl"></div>
        <div class="row-center-center" >
         <div style="width: 1860px;position: relative;" >
@@ -32,13 +32,15 @@ import earthhImg from "@/assets/images/earth.jpg";
 import glowImg from "@/assets/images/glow.png";
 import innerGlowImg from "@/assets/images/innerGlow.png";
 import * as THREE from "three";
+const width=ref(1920);
+const height=ref(1080);
 // 引入轨道控制器扩展库OrbitControls.js
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 const webgl=ref<HTMLElement|null>(null);
  //创建一个场景
  const scene = new THREE.Scene()
     //创建一个相机
-    const camera =new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,100000)
+    const camera =new THREE.PerspectiveCamera(45,width.value/height.value,0.1,100000)
     camera.position.set(0, 60, 300);
 
     //创建一个渲染器
@@ -58,7 +60,7 @@ onMounted(()=>{
      const texture = new THREE.TextureLoader().load(starsImg);
      console.log("texture",texture);
      
-     const material = new THREE.PointsMaterial( { color:"rgba(255,255,255,0.1)",size:2,map:texture } )
+     const material = new THREE.PointsMaterial( { color:"#ffffff",size:2,map:texture } )
      const start=new THREE.Points(starrySky,material);
      scene.add(start);
      //创建一个地球
@@ -97,7 +99,7 @@ onMounted(()=>{
         luminousTheEarth2.scale.set(126,126,0);
         luminousTheEarth2.position.set(0,40,0);
         scene.add(luminousTheEarth2);
-    renderer.setSize(window.innerWidth,window.screen.height);
+    renderer.setSize(width.value,height.value);
     //使用画布进行渲染到页面
     webgl.value?.appendChild(renderer.domElement)
     //轨道控制器

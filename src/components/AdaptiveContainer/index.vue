@@ -2,11 +2,11 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-23 17:50:02
  * @FilePath: \DjjBlogs\src\components\AdaptiveContainer\index.vue
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-07-21 08:20:19
+ * @LastEditors: djj
+ * @LastEditTime: 2023-07-22 00:28:48
 -->
 <template>
-    <div id="container" ref="container" :style="{}">
+    <div id="container" ref="container" :style="{width:`${options?.width}px`,height:`${options?.height}px`}">
         <slot></slot>
     </div>
 </template>
@@ -28,20 +28,17 @@ let dom: any
  * @descriptio 初始化
  */
 const init=()=>{
-   
     dom=context?.$refs["container"];
-    console.log("dom",dom,context);
-    
     if(context?.options&&context.options.width&&context.options.height){
         width.value=context.options.width;
         height.value=context.options.height
     }else{
         width.value=dom.clientWidth;
-        height.value=dom.clientHeigt
+        height.value=dom.clientHeight;
     }
     if(!originalWidth.value||!originalHeight.value){
-        originalWidth.value=window.screen.width;
-        originalHeight.value=window.screen.height;
+        originalWidth.value=window.innerWidth;
+        originalHeight.value=window.innerHeight;
     }
 }
 
@@ -63,8 +60,6 @@ const updateScale=()=>{
     const  realHeight=height.value||originalHeight.value;
     const widthScale=currentWidth/realWidth;
     const heightScale=currentHeight/realHeight;
-    console.log("widthScale",currentHeight,heightScale);
-    
     dom.style.transform=`scale(${widthScale.toFixed(2)},${heightScale.toFixed(2)})`
 }
 const onResize=()=>{
@@ -83,8 +78,8 @@ onUnmounted(()=>{
 </script>
 <style lang="scss" scoped>
 #container{
-    width: 100%;
-    height: 100%;
+    width: 100vh;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;

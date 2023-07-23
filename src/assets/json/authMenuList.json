@@ -12,7 +12,8 @@
                 "isHide": false,
 				"isFull": false
             }
-        },{
+        },
+        {
             "path":"/largeDataScreen",
             "name":"largeDataScreen",
             "component":"/largeDataScreen/index",
@@ -24,7 +25,8 @@
                 "isHide": false,
 				"isFull": true
             }
-        },{
+        },
+        {
             "path":"/component",
             "name":"component",
             "component":"/component/index",
@@ -51,6 +53,19 @@
                     } 
                 }
             ]
+        },
+        {
+            "path":"/myResource",
+            "name":"myResource",
+            "component":"/myResource/index",
+            "meta":{
+                "icon": "HomeFilled",
+                "title": "我的资源",
+                "menuOrder":1,
+                "isAffix": false,
+                "isHide": false,
+				"isFull": false
+            }
         }
     ]
 }   
