@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-14 08:40:15
- * @LastEditTime: 2023-06-14 23:34:35
+ * @LastEditTime: 2023-07-24 09:00:12
 -->
 <template>
   <div style="margin-bottom: 20px;">
@@ -111,7 +111,7 @@ const shortcuts = [
   },
 ];
 const onMenu = (index: string) => {
-  console.log("onMenu", index);
+
 };
 /** 图表配置*/
 function setOption():EChartsOption{

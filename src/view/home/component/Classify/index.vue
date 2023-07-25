@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-06-14 23:42:07
  * @FilePath: \DjjBlogs\src\view\home\component\Classify\index.vue
- * @LastEditors: djj
- * @LastEditTime: 2023-06-16 01:09:00
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-24 08:59:15
 -->
 <template>
   <el-card class="box-card">
@@ -123,8 +123,6 @@ function renderPieChart(mockData: Array<any>): EChartsOption {
       show: true,
       trigger: "item",
       formatter: function (params) {
-        console.log("params", params);
-
         const data = params as any;
         return `${data.seriesName}<br/> ${data.marker}${data.data.legendname}<br/>数量: ${data.data.value}<br/>占比:${data.data.percent}`;
       },
