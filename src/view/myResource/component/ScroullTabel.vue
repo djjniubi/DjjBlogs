@@ -2,16 +2,16 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-07-23 18:05:52
  * @FilePath: \DjjBlogs\src\view\myResource\component\ScroullTabel.vue
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-07-26 17:28:24
+ * @LastEditors: djj
+ * @LastEditTime: 2023-07-27 00:37:38
 -->
 <template>
     <div class="resource" ref="scroull" id="scroull">
       <div class="header" :style="`background-color:${headerBg};height:${headerHeight}px;`">
         <div class="header-item" v-for="(headerItem, index) in headerData" :key="index" :style="`width:${headerWidth}px;line-height:${headerHeight}px;font-size:${headerFontSize}px;color:${headerColor[index]};font-weight:${headerFontWeight};`" :align="align[index]" v-html="headerItem"></div>
       </div>
-      <div class="row">
-        <div class="row-item" v-for="(rowItem,rowIndex) in currentRowsData" :key="rowItem.rowIndex" :style="` height:${50};line-height:${50}px;font-size:${18}px;color:${'#000'};font-weight:${700};background-color:${rowIndex%2===0?'#fff':'#ccc'};`" :align="'center'">
+      <div class="row" :style="`height:${250-50}px`">
+        <div class="row-item" v-for="(rowItem,rowIndex) in currentRowsData" :key="rowItem.rowIndex" :style="` height:${rowHeights[rowIndex]}px;line-height:${rowHeights[rowIndex]}px;font-size:${18}px;color:${'#000'};font-weight:${700};background-color:${rowItem.rowIndex%2===0?'#fff':'#ccc'};`" :align="'center'">
           <div class="item" v-for="(item,index) in rowItem.data" :key="item+index" v-html="item" style="width: 80px;color: #000;"></div>
         </div>
       </div>
@@ -65,18 +65,20 @@ const rowData:Ref=ref([]);
 const currentIndex=ref(0);
 const actualConfig=ref({});
 const isAnimationStop=ref(false);
-const scroull=ref(null)
+const scroull=ref(null);
+const rowNum = ref(defaultConfig.rowNum);
+const rowHeights:Ref=ref([])
 // const config:Ref=ref({});
 // config.value={
 //   headerData
 // }
+let avgHeight 
 rowData.value=defaultConfig.data.map((item,index)=>({
  data:item,
- rowIndex:`王${index}`
+ rowIndex:index
 }))
-
-console.log("useScreen",useScreen("scroull"));
-console.log("rowData",rowData.value);
+const {width,height}=useScreen("scroull")
+console.log("useScreen ",width.value,height.value);
 async function startAnimation(){
   const  config =actualConfig.value;
   const {moveNum,rowNum}=config as any;
@@ -94,36 +96,55 @@ rows.push(...newRows)
   // debugger
 
   currentRowsData.value= rows;
- if(isAnimationStop.value)return;
- await new Promise(resolve=>setTimeout(resolve,2000));
+
+  //先将所有行的高度还原
+  rowHeights.value=new Array(totalLength).fill(avgHeight);
+  const waitTime = 300;
+  if(isAnimationStop.value)return;
+  await new Promise(resolve => setTimeout(resolve, waitTime));
+  // 将moveNum的行高度设置0
+  rowHeights.value.splice(0, moveNum, ...new Array(moveNum).fill(0))
+
  currentIndex.value+=moveNum;
+
   // 是否到达最后一组数据
   const isLast = currentIndex.value - totalLength;
-  console.log("isLast",isLast,totalLength);
+  // console.log("isLast",isLast,totalLength);
   
   if(isLast>=0){
     currentIndex.value=0
   }
-//  await startAnimation()
+  await new Promise(resolve=>setTimeout(resolve,2000-waitTime));
+ await startAnimation()
 }
 function handleHeader(config:any){
-  //动态计算高度
+ 
   const{headerHeight}=config;
   console.log("handleHeader888",props.config);
 }
 
 
 function handleRows(config:any){
-  console.log("handleRows",config);
-  
+  //动态计算高度
+  const{headerHeight}=config;
+  rowNum.value=config.rowNum;
+  const unusedHeight = height.value-headerHeight;
+   // 如果rowNum大于实际数据长度，则以实际数据长度为准
+   if(rowNum.value>rowData.value.length){
+    rowNum.value=rowData.value.length;
+   };
+   avgHeight=unusedHeight/rowNum.value;
+   rowHeights.value=new Array(rowNum.value).fill(avgHeight);
+   console.log("rowHeights.value ",rowHeights.value);
+   
 }
 function undate(){
   const _actualConfig=assign(defaultConfig,props.config as object);
   handleHeader(_actualConfig);
-  
+  handleRows(_actualConfig)
   
   actualConfig.value=_actualConfig;
-  console.log("actualConfig",actualConfig.value);
+  console.log("actualConfig ",actualConfig.value);
   startAnimation()
 }
 
@@ -133,7 +154,7 @@ function assign(objeData:object,objeData2:object):any{
 }
 onMounted(()=>{
   // console.log("scroull",scroull);
-  console.log("useScreen222222",useScreen("scroull"));
+  // console.log("useScreen222222",useScreen("scroull"));
   // startAnimation()
 })
 watch(()=>props.config,()=>{
@@ -166,12 +187,14 @@ watch(()=>props.config,()=>{
 }
 
 .row{
-  // overflow: hidden;
+  overflow: hidden;
   height: 250px;
   .row-item{
     display: flex;
+    transition: all 0.3s linear;
     .item{
-      @include text
+      @include text;
+      
     }
   }
 }
