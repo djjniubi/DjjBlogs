@@ -12,6 +12,7 @@
     "@element-plus/icons-vue": "^2.0.10",
     "@types/echarts": "^4.9.18",
     "@types/three": "^0.154.0",
+    "@types/uuid": "^9.0.2",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.4.0",
@@ -26,6 +27,7 @@
     "qs": "^6.11.0",
     "sass": "^1.58.0",
     "three": "^0.154.0",
+    "uuid": "^9.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
   },
