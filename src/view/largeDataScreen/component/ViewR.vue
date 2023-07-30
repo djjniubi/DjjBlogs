@@ -2,11 +2,13 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-07-20 15:27:09
- * @LastEditTime: 2023-07-22 02:06:01
+ * @LastEditTime: 2023-07-31 00:44:29
 -->
 <template>
   <div class="view-l">
-    <div class="view-item1"></div>
+    <div class="view-item1">
+      <ScroullTabel :config="config"></ScroullTabel>
+    </div>
     <div class="view-item2 ">
       <div class="row-around-center" style="padding-top:35px ;height: 100%;">
       <div class="column-center-center" style="width: 224px; height: 100%">
@@ -69,14 +71,46 @@
   </div>
 </template>
 <script setup lang="ts" name="ViewR">
-import { ref, onMounted } from "vue";
+import { ref,Ref, onMounted } from "vue";
 import { EChartsOption } from "echarts";
 import { nodeElemt } from "@/hooks/echatesHook";
+import ScroullTabel from "../../myResource/component/ScroullTabel.vue"
 const lfetBox={text:"86",color:"#FCB223"};
 const rightBox={text:"86",color:"#FC5659"};
 type MokeData={
   text:string,
   color:string
+}
+const config:Ref=ref({});
+function undate(){
+  config.value={
+  //标题数据
+  headerData:[],
+  //标题宽度
+  headerWidth:80,
+  //标题高度
+  headerHeight:50,
+  //标题字号
+  headerFontSize:18,
+  //标题是否加粗
+  headerFontWeight:700,
+  //标题背景色
+  headerBg:"#fd5565",
+  //序列号标题的内容默认#
+  headerIndexConter:"排名",
+  //列表样式
+  rowStyle:[{color:"red",width:"100px"},{color:"red",width:"250px"},{color:"red",width:"150px"}],
+  rowNum:4,
+  headerIndex:false,
+  data:[ [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "A部门排查出隐患122个", "2023-07-31"],
+    [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "B部门排查出隐患102个", "2023-07-31"],
+    [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "C部门排查出隐患112个", "2023-07-31"],
+    [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "D部门排查出隐患12个", "2023-07-31"],
+    [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "E部门排查出隐患162个", "2023-07-31"],
+    [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "F部门排查出隐患162个", "2023-07-31"],
+   ],
+    aligns:["left","left","right"]
+}
 }
 function renderPieChart(mokeData:MokeData):EChartsOption{
     return{
@@ -107,7 +141,8 @@ function renderPieChart(mokeData:MokeData):EChartsOption{
 
 onMounted(()=>{
     nodeElemt("#lfet-box",renderPieChart(lfetBox));
-    nodeElemt("#right-box",renderPieChart(rightBox))
+    nodeElemt("#right-box",renderPieChart(rightBox));
+    undate()
 })
 </script>
 <style lang="scss" scoped>
