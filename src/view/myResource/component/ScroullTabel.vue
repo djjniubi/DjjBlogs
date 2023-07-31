@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-07-23 18:05:52
  * @FilePath: \DjjBlogs\src\view\myResource\component\ScroullTabel.vue
- * @LastEditors: djj
- * @LastEditTime: 2023-07-31 00:45:31
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-31 09:13:23
 -->
 <template>
   <div class="resource" ref="scroull" :id="id">
@@ -28,8 +28,6 @@
 import { ref, Ref, watch, onMounted } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { useScreen } from "@/hooks/useScreen";
-import { number } from "echarts";
-import { Obj } from "@popperjs/core";
 const props = defineProps({
   config: {
     type: Object,
@@ -46,6 +44,10 @@ const defaultConfig = {
   headerBg: "transparent",
   //标题的高度
   headerHeight: 0,
+  //标题字体字号
+  headerFontSize:16,
+  //标题是字体是否加粗
+  headerFontWeight:'',
   //是否展示标题序号
   headerIndex: false,
   //序列号标题内容
@@ -79,13 +81,13 @@ const defaultConfig = {
 const id = ref(`scroull-${uuidv4()}`);
 const { width, height } = useScreen(id.value);
 const headerData: Ref = ref([]);
-const headerHeight = ref(50);
-const headerWidth = ref(80);
-const headerFontSize = ref(18);
-const headerFontWeight = ref(700);
-const headerBg = ref("transparent");
+const headerHeight = ref(0);
+const headerWidth = ref(0);
+const headerFontSize = ref(0);
+const headerFontWeight = ref('');
+const headerBg = ref("");
 const headerColor = ref("#fff");
-const align = ref(["center", "center", "center","center"]);
+const align = ref([]);
 const currentRowsData: Ref = ref([]);
 const rowData: Ref = ref([]);
 const currentIndex = ref(0);
