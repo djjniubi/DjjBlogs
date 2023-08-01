@@ -2,8 +2,8 @@
  * @Author: 前端菜鸟--邓建军
  * @Date: 2023-07-21 21:02:27
  * @FilePath: \DjjBlogs\src\view\myResource\index.vue
- * @LastEditors: djj
- * @LastEditTime: 2023-07-31 00:36:49
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-08-01 15:16:02
 -->
 <template>
   <div class="resource">
@@ -17,7 +17,8 @@
 </template>
 <script setup lang="ts">
 import { ref, Ref,onMounted } from "vue";
-import ScroullTabel from "./component/ScroullTabel.vue"
+// import ScroullTabel from "./component/ScroullTabel.vue";
+import ScroullTabel from "../largeDataScreen/component/ScroullTabel/index.vue"
 const config:Ref=ref({});
 
 
@@ -40,7 +41,7 @@ function undate(){
   //列表样式
   rowStyle:[{color:"red",width:"100px"},{color:"red",width:"250px"},{color:"red",width:"150px"}],
   headerIndex:false,
-  data:[ [`<div style="width:100%;height:100%"><span style="background-color:red;border-radius:50%;color:#fff;padding:0 10px">!</span></div>`, "A部门排查出隐患122个", "2023-07-31"],
+  data:[ ["小王0", "18", "20"],
     ["小王1", "18", "20"],
     ["小王2", "18", "20"],
     ["小王3", "18", "20"],

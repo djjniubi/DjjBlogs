@@ -11,7 +11,7 @@ export interface ParameterConfiguration{
      //标题字体字号
      headerFontSize:number,
      //标题是字体是否加粗
-     headerFontWeight:string,
+     headerFontWeight:string|number,
      //是否展示标题序号
      headerIndex:boolean,
      //序列号标题内容
