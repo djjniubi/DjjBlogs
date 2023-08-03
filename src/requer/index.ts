@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-07-18 16:38:33
+ * @LastEditTime: 2023-08-03 09:52:25
  */
 import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
@@ -33,7 +33,6 @@ http.interceptors.request.use((config)=>{
 
 //响应拦截
 http.interceptors.response.use((response:AxiosResponse)=>{
-    console.log("response",document.cookie.split(" "));
     let message = ''
     const {data} =response
     const {code} =data

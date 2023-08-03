@@ -27,6 +27,19 @@
             }
         },
         {
+            "path":"/therrData",
+            "name":"therrData",
+            "component":"/therrData/index",
+            "meta":{
+                "icon": "HomeFilled",
+                "title": "Three",
+                "menuOrder":1,
+                "isAffix": false,
+                "isHide": false,
+				"isFull": true
+            }
+        },
+        {
             "path":"/component",
             "name":"component",
             "component":"/component/index",

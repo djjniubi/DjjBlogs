@@ -2,14 +2,9 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-07-31 08:54:30
- * @LastEditTime: 2023-08-01 15:43:51
+ * @LastEditTime: 2023-08-03 09:36:03
 -->
-<!--
- * @Description: 
- * @Author: 邓建军
- * @Date: 2023-07-31 08:54:30
- * @LastEditTime: 2023-08-01 14:31:34
--->
+
 <template>
   <div class="table-box" :id="id">
     <div class="header" v-if="isHideHeader" :style="{ backgroundColor: headerBg, height: `${headerHeight}px`, fontWeight: headerFontWeight, fontSize: headerFontSize, color: headerColor }">
@@ -232,10 +227,11 @@ const startAnimation = async () => {
 /*停止动画*/
 const stopStartAnimation = () => {
   isAnimationStop.value = true;
+  // currentIndex.value--;
 };
 //移出恢复动画
 const mouseleave=()=>{
-//  isAnimationStop.value=false;
+ isAnimationStop.value=false;
 //  startAnimation()
 };
 /*更新数据*/

@@ -2,11 +2,10 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-06-21 09:43:48
- * @LastEditTime: 2023-07-14 18:10:24
+ * @LastEditTime: 2023-08-03 10:08:48
  */
 import {defineStore} from "pinia";
 import{AuthState} from "../interface/index";
-import {getAuthMenuListApi} from "@/hooks/pageRoute";
 import {getFlatMapList,getShowMenuList} from "@/utils/index";
 import routerData from "@/assets/json/authMenuList.json";
 export const userAuthStore=defineStore('minUserAuthStore',{
