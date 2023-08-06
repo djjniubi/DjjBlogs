@@ -32,7 +32,7 @@
             "component":"/therrData/index",
             "meta":{
                 "icon": "HomeFilled",
-                "title": "Three",
+                "title": "粮仓3D可视化",
                 "menuOrder":1,
                 "isAffix": false,
                 "isHide": false,
