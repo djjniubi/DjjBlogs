@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-03-27 08:10:53
- * @LastEditTime: 2023-08-03 09:52:25
+ * @LastEditTime: 2023-08-07 15:03:50
  */
 import axios from "axios"
 import type {AxiosInstance,AxiosError,AxiosRequestConfig,AxiosResponse} from "axios"
@@ -12,7 +12,7 @@ import {errorType} from "@/requer/errorType"
 import {GlobalStore} from "@/store"
 import router from "@/route"
 const globalStore=GlobalStore();
-console.log("import.meta.env.VITE_API_URL ",import.meta.env.VITE_API_URL);
+// console.log("import.meta.env.VITE_API_URL ",import.meta.env.VITE_API_URL);
 
 const config ={
     baseURL:import.meta.env.VITE_API_URL as string,

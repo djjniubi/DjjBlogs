@@ -1,3 +1,9 @@
+/*
+ * @Description: 
+ * @Author: 邓建军
+ * @Date: 2023-08-07 07:58:13
+ * @LastEditTime: 2023-08-07 15:37:29
+ */
 import * as THREE  from "three";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 //声明一组对象
@@ -9,13 +15,12 @@ let  granaryArr:Array<any>=[];
 loaser.load("/model/modelZH.glb",(gltf)=>{
    console.log("gltf",gltf);
    
-    gltf.scene.traverse((object)=>{
-        let material=object as any
+    gltf.scene.traverse((object:any)=>{
         if(object.type==="Mesh"){
-            if(material.map&&material.color){
-                material=new THREE.MeshLambertMaterial({
-                    map:material.map,
-                    color:material.color
+            if(object.material.map&&object.material.color){
+                object.material =new THREE.MeshLambertMaterial({
+                    map:object.material.map,
+                    color:object.material.color
                 })
             }
         }
