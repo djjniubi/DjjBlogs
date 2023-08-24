@@ -2,17 +2,17 @@
  * @Description: 
  * @Author: 邓建军
  * @Date: 2023-08-07 07:58:13
- * @LastEditTime: 2023-08-07 15:37:29
+ * @LastEditTime: 2023-08-24 08:19:25
  */
 import * as THREE  from "three";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 //声明一组对象
 const model =new THREE.Group();
 //创建一个GLTF加载器
-const loaser =new GLTFLoader();
+const loader =new GLTFLoader();
 //粮仓模型对象集合
 let  granaryArr:Array<any>=[];
-loaser.load("/model/modelZH.glb",(gltf)=>{
+loader.load("/model/modelZH.glb",(gltf)=>{
    console.log("gltf",gltf);
    
     gltf.scene.traverse((object:any)=>{
